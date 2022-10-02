@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 
+from chronos.web.validators import file_size
+
 
 class Profile(models.Model):
     USERNAME_MAX_LEN = 30
@@ -37,4 +39,13 @@ class Profile(models.Model):
         validators=[
             MinLengthValidator(LAST_NAME_MIN_LEN),
         ]
+    )
+
+    image = models.ImageField(
+        upload_to='profile',
+        null=True,
+        blank=True,
+        validators=(
+            file_size,
+        )
     )

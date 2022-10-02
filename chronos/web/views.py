@@ -33,3 +33,7 @@ def register_profile(request):
     }
 
     return render(request, 'register.html', context)
+
+
+def show_profile(request):
+    return render(request, 'profile.html')
