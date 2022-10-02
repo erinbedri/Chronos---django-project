@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container text-center text-md-start mt-5">
-        <form method="POST" action="{% url 'register profile' %}">
+        <form method="POST" action="{% url 'register profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
 

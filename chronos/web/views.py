@@ -21,7 +21,7 @@ def show_homepage(request):
 
 def register_profile(request):
     if request.method == 'POST':
-        form = RegisterProfileForm(request.POST)
+        form = RegisterProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('show homepage')
@@ -36,4 +36,10 @@ def register_profile(request):
 
 
 def show_profile(request):
-    return render(request, 'profile.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'profile.html', context)

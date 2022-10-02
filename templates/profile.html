@@ -1,1 +1,37 @@
 {% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container text-center text-md-start mt-5">
+
+        <fieldset disabled>
+            <legend>My Profile</legend>
+            <img src="{{ profile.image.url }}" width="120" alt="profile picture">
+
+            <div class="mb-3 w-25">
+                <label for="disabledTextInput" class="form-label">First Name</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ profile.first_name }}">
+            </div>
+
+            <div class="mb-3 w-25">
+                <label for="disabledTextInput" class="form-label">Last Name</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ profile.last_name }}">
+            </div>
+
+            <div class="mb-3 w-25">
+                <label for="disabledTextInput" class="form-label">Username</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ profile.username }}">
+            </div>
+
+            <div class="mb-3 w-25">
+                <label for="disabledTextInput" class="form-label">Email</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ profile.email }}">
+            </div>
+
+        </fieldset>
+
+        <button class="btn btn-secondary" onclick="location.href='#'" type="button">Edit</button>
+        <button class="btn btn-danger" onclick="location.href='#'" type="button">Delete</button>
+    </div>
+
+
+{% endblock %}
