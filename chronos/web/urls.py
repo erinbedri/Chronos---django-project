@@ -11,4 +11,6 @@ urlpatterns = [
     path('watch/add/', views.add_watch, name='add watch'),
     path('watch/all/', views.show_dashboard, name='show dashboard'),
     path('watch/details/<int:pk>', views.show_watch, name='show watch'),
+    path('watch/edit/<int:pk>', views.edit_watch, name='edit watch'),
+    path('watch/delete/<int:pk>', views.delete_watch, name='delete watch'),
 ]

@@ -15,3 +15,14 @@ class CreateWatchForm(forms.ModelForm):
         fields = ('owner', 'brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
 
 
+class DeleteWatchForm(forms.ModelForm):
+    class Meta:
+        model = Watch
+        fields = ()
+
+
+class EditWatchForm(forms.ModelForm):
+    class Meta:
+        model = Watch
+        fields = ('owner', 'brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
+
