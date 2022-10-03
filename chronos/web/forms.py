@@ -12,6 +12,6 @@ class RegisterProfileForm(forms.ModelForm):
 class CreateWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
-        fields = ('__all__')
+        fields = ('owner', 'brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
 
 

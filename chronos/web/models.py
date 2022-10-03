@@ -61,6 +61,9 @@ class Profile(models.Model):
         auto_now=True
     )
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class Watch(models.Model):
     BRAND_MAX_LEN = 30
@@ -135,8 +138,6 @@ class Watch(models.Model):
 
     image = models.ImageField(
         upload_to='watch',
-        null=True,
-        blank=True,
         validators=(
             file_size,
         )
@@ -149,3 +150,6 @@ class Watch(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    def __str__(self):
+        return f'{self.brand} {self.model}'

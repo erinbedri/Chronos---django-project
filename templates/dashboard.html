@@ -1,18 +1,23 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+    <div class="container-sm"  style="margin-top: 50px">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
 
-    {% for watch in watches %}
-        <div class="container text-center text-md-start mt-5">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ watch.image.url }}" class="card-img-top" alt="{{ watch.brand }} {{ watch.model }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ watch.brand }} {{ watch.model }}</h5>
-                    <p class="card-text">{{ watch.description|truncatechars:50 }}</p>
-                    <a href="#" class="btn btn-primary">Details</a>
+            {% for watch in watches %}
+                <div class="col">
+                    <div class="card">
+                        <img src="{{ watch.image.url }}" style="object-fit: cover; height: 250px" class="" alt="{{ watch.brand }} {{ watch.model }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ watch.brand }} {{ watch.model }}</h5>
+                            <p class="card-text">{{ watch.description|truncatechars:50 }}</p>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
+
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}
