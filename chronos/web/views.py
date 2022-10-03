@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from chronos.web.forms import RegisterProfileForm, CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm
+from chronos.web.forms import RegisterProfileForm, CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
+    DeleteProfileForm
 from chronos.web.models import Profile, Watch
 
 
@@ -38,7 +39,7 @@ def register_profile(request):
         form = RegisterProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('show homepage')
+            return redirect('show dashboard')
     else:
         form = RegisterProfileForm()
 
@@ -79,6 +80,25 @@ def edit_profile(request):
     }
 
     return render(request, 'profile_edit.html', context)
+
+
+def delete_profile(request):
+    profile = get_profile()
+
+    if request.method == 'POST':
+        form = DeleteProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile.delete()
+            return redirect('show homepage')
+    else:
+        form = DeleteProfileForm(instance=profile)
+
+    context = {
+        'profile': profile,
+        'form': form
+    }
+
+    return render(request, 'profile_delete.html', context)
 
 
 def add_watch(request):

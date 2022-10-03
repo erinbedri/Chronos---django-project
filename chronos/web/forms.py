@@ -15,6 +15,12 @@ class EditProfileForm(forms.ModelForm):
         fields = ('__all__')
 
 
+class DeleteProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ()
+
+
 class CreateWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
