@@ -2,8 +2,6 @@ import os
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
-from chronos.web import models
 from chronos.web.forms import RegisterProfileForm, CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm
 from chronos.web.models import Profile, Watch
@@ -39,11 +37,13 @@ def show_dashboard(request):
     )
 
     brands = {watch.brand for watch in Watch.objects.all()}
+    styles = {watch.style for watch in Watch.objects.all()}
 
     context = {
         'profile': profile,
         'watches': watches,
         'brands': brands,
+        'styles': styles,
     }
 
     return render(request, 'dashboard.html', context)

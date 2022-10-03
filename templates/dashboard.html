@@ -4,17 +4,36 @@
     <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-2">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="text" placeholder="Search..." name="q">
-                    <button class="btn btn-outline-secondary" type="text">Search</button>
-                </form>
+                <div>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="text" placeholder="Search..." name="q">
+                        <button class="btn btn-outline-secondary" type="text">Search</button>
+                    </form>
+                </div>
 
-                <a href="{% url 'show dashboard' %}">All</a>
-                {% for brand in brands %}
+                <div>
+                    <h4><u>Filter by:</u></h4>
+
                     <div>
-                        <a href="{% url 'show dashboard' %}?q={{ brand }}">{{ brand }}</a>
+                        <h5>Brand</h5>
+                        <a href="{% url 'show dashboard' %}">All</a>
+                        {% for brand in brands %}
+                            <div>
+                                <a href="{% url 'show dashboard' %}?q={{ brand }}">{{ brand }}</a>
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+
+                    <div>
+                        <h5>Style</h5>
+                        <a href="{% url 'show dashboard' %}">All</a>
+                        {% for style in styles %}
+                            <div>
+                                <a href="{% url 'show dashboard' %}?q={{ style }}">{{ style }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
 
             <div class="col-10 text-center">
