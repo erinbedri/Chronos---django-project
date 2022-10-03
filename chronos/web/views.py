@@ -52,9 +52,11 @@ def register_profile(request):
 
 def show_profile(request):
     profile = get_profile()
+    watch_count = len(Watch.objects.filter(owner=profile))
 
     context = {
         'profile': profile,
+        'watch_count': watch_count,
     }
 
     return render(request, 'profile.html', context)

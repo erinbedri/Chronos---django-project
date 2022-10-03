@@ -2,6 +2,7 @@ from datetime import date
 
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models import CASCADE
 
 from chronos.web.validators import file_size
 
@@ -52,6 +53,14 @@ class Profile(models.Model):
         )
     )
 
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
 
 class Watch(models.Model):
     BRAND_MAX_LEN = 30
@@ -81,6 +90,11 @@ class Watch(models.Model):
     CONDITION_MAX_LEN = 50
 
     DESCRIPTION_MAX_LEN = 200
+
+    owner = models.ForeignKey(
+        Profile,
+        on_delete=CASCADE
+    )
 
     brand = models.CharField(
         max_length=BRAND_MAX_LEN,
@@ -126,4 +140,12 @@ class Watch(models.Model):
         validators=(
             file_size,
         )
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
     )
