@@ -1,7 +1,9 @@
 import os
 
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
+from chronos.web import models
 from chronos.web.forms import RegisterProfileForm, CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm
 from chronos.web.models import Profile, Watch
@@ -24,11 +26,19 @@ def show_homepage(request):
 
 def show_dashboard(request):
     profile = get_profile()
-    watches = Watch.objects.all()
+
+    q = request.GET.get('q') if request.GET.get('q') is not None else ''
+
+    watches = Watch.objects.filter(
+        Q(brand__icontains=q)
+    )
+
+    brands = {watch.brand for watch in Watch.objects.all()}
 
     context = {
         'profile': profile,
         'watches': watches,
+        'brands': brands,
     }
 
     return render(request, 'dashboard.html', context)
