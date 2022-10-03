@@ -30,7 +30,12 @@ def show_dashboard(request):
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
 
     watches = Watch.objects.filter(
-        Q(brand__icontains=q)
+        Q(brand__icontains=q) |
+        Q(model__icontains=q) |
+        Q(style__icontains=q) |
+        Q(year__icontains=q) |
+        Q(condition__icontains=q) |
+        Q(description__icontains=q)
     )
 
     brands = {watch.brand for watch in Watch.objects.all()}
