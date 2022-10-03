@@ -27,14 +27,15 @@ def show_dashboard(request):
 
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
 
-    watches = Watch.objects.filter(
-        Q(brand__icontains=q) |
-        Q(model__icontains=q) |
-        Q(style__icontains=q) |
-        Q(year__icontains=q) |
-        Q(condition__icontains=q) |
-        Q(description__icontains=q)
-    )
+    watches = Watch.objects \
+        .filter(
+            Q(brand__icontains=q) |
+            Q(model__icontains=q) |
+            Q(style__icontains=q) |
+            Q(year__icontains=q) |
+            Q(condition__icontains=q) |
+            Q(description__icontains=q))\
+        .order_by('-created_at')
 
     brands = {watch.brand for watch in Watch.objects.all()}
     styles = {watch.style for watch in Watch.objects.all()}
@@ -193,4 +194,3 @@ def delete_watch(request, pk):
     }
 
     return render(request, 'watch_delete.html', context)
-

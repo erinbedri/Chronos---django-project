@@ -76,16 +76,16 @@ class Watch(models.Model):
     YEAR_MAX_VALUE = date.today().year
 
     WATCH_STYLES_CHOICES = [
-        ('Pocket Watch', 'Pocket Watch'),
-        ('Railroad Watch', 'Railroad Watch'),
-        ('Dress Watch', 'Dress Watch'),
-        ('Field Watch', 'Field Watch'),
-        ('Aviator Watch', 'Aviator Watch'),
-        ('Dive Watch', 'Dive Watch'),
-        ('Racing Watch', 'Racing Watch'),
-        ('Digital Watch', 'Digital Watch'),
-        ('Smart Watch ', 'Smart Watch '),
-        ('Fashion Watch', 'Fashion Watch'),
+        ('Pocket', 'Pocket'),
+        ('Railroad', 'Railroad'),
+        ('Dress', 'Dress'),
+        ('Field', 'Field'),
+        ('Aviator', 'Aviator'),
+        ('Dive', 'Dive'),
+        ('Racing', 'Racing'),
+        ('Digital', 'Digital'),
+        ('Smart ', 'Smart'),
+        ('Fashion', 'Fashion'),
     ]
 
     STYLE_MAX_LEN = max([len(style[1]) for style in WATCH_STYLES_CHOICES])
