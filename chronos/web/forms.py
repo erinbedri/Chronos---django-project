@@ -9,6 +9,12 @@ class RegisterProfileForm(forms.ModelForm):
         fields = ('__all__')
 
 
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('__all__')
+
+
 class CreateWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
