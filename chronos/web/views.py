@@ -81,5 +81,15 @@ def add_watch(request):
     return render(request, 'add_watch.html', context)
 
 
+def show_watch(request, pk):
+    profile = get_profile()
+    watch = Watch.objects.get(pk=pk)
+
+    context = {
+        'watch': watch,
+        'profile': profile,
+    }
+
+    return render(request, 'watch_details.html', context)
 
 

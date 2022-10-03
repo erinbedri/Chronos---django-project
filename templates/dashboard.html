@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ watch.brand }} {{ watch.model }}</h5>
                             <p class="card-text">{{ watch.description|truncatechars:50 }}</p>
-                            <a href="#" class="btn btn-secondary">Details</a>
+                            <a href="{% url 'show watch' watch.id %}" class="btn btn-secondary">Details</a>
                         </div>
                     </div>
                 </div>

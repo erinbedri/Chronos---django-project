@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container-sm" style="margin-top: 50px">
+        <div class="row">
+            <div class="col-8 text-center">
+                <figure class="figure border">
+                    <img src="{{ watch.image.url }}" class="figure-img img-fluid rounded"
+                         style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                </figure>
+            </div>
+            <div class="col-4">
+                <form>
+                    <fieldset disabled>
+                        <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Owner</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.owner.username }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Brand</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.brand }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Model</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.model }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Reference Number</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.reference_number }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Production Year</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.year }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Style</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.style }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Condition</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.condition }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Description</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.description }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Uploaded</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.created_at }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Last Updated</label>
+                            <input type="text" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.updated_at|timesince }} ago">
+                        </div>
+                    </fieldset>
+                    <button type="button" onclick="location.href='#'"
+                            class="btn btn-outline-secondary me-1 flex-grow-1">Edit
+                    </button>
+                    <button type="button" onclick="location.href='#'"
+                            class="btn btn-danger flex-grow-1">Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
