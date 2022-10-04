@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="col-10 text-center">
+            <div class="col-10">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
                     {% if not watches %}
                         <h4>No watches found!</h4>
@@ -42,11 +42,11 @@
                         {% for watch in watches %}
                             <div class="col">
                                 <div class="card">
-                                    <img src="{{ watch.image.url }}" style="object-fit: cover; height: 250px" class=""
+                                    <img src="{{ watch.image.url }}" style="object-fit: cover; height: 150px" class=""
                                          alt="{{ watch.brand }} {{ watch.model }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ watch.brand }} {{ watch.model }}</h5>
-                                        <p class="card-text">{{ watch.description|truncatechars:50 }}</p>
+                                        <h5 class="card-title">{{ watch.brand }} {{ watch.model }} ({{ watch.year }})</h5>
+                                        <p class="card-text">{{ watch.condition|truncatechars:50 }}</p>
                                         <a href="{% url 'show watch' watch.id %}" class="btn btn-secondary">Details</a>
                                     </div>
                                 </div>

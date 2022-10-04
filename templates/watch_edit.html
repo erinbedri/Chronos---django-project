@@ -4,10 +4,13 @@
 
     <div class="container text-center text-md-start mt-5">
         <div class="col-lg-4 col-lg-offset-4">
+            <h4>Edit details of your watch</h4>
             <form method="POST" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-secondary">Edit</button>
+                <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
+                        class="btn btn-danger flex-grow-1">Cancel</button>
             </form>
         </div>
     </div>

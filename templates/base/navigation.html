@@ -13,19 +13,19 @@
 
                 {% if profile %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'show dashboard' %}">All Watches</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'show dashboard' %}">All Watches</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'add watch' %}">Add Watch</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'add watch' %}">Add Watch</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'show profile' %}">Profile</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'show profile' %}">Profile</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'register profile' %}">Register</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'register profile' %}">Register</a>
                     </li>
                 {% endif %}
             </ul>
