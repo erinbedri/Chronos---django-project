@@ -63,12 +63,15 @@
                                    placeholder="{{ watch.updated_at|timesince }} ago">
                         </div>
                     </fieldset>
-                    <button type="button" onclick="location.href='{% url 'edit watch' watch.id %}'"
-                            class="btn btn-outline-secondary me-1 flex-grow-1">Edit
-                    </button>
-                    <button type="button" onclick="location.href='{% url 'delete watch' watch.id %}'"
-                            class="btn btn-danger flex-grow-1">Delete
-                    </button>
+
+                    {% if request.user.is_authenticated and request.user == watch.owner %}
+                        <button type="button" onclick="location.href='{% url 'edit watch' watch.id %}'"
+                                class="btn btn-outline-secondary me-1 flex-grow-1">Edit
+                        </button>
+                        <button type="button" onclick="location.href='{% url 'delete watch' watch.id %}'"
+                                class="btn btn-danger flex-grow-1">Delete
+                        </button>
+                    {% endif %}
                 </form>
             </div>
         </div>
