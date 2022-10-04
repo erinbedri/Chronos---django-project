@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import CASCADE
@@ -95,7 +96,7 @@ class Watch(models.Model):
     DESCRIPTION_MAX_LEN = 200
 
     owner = models.ForeignKey(
-        Profile,
+        User,
         on_delete=CASCADE
     )
 
