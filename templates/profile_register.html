@@ -8,11 +8,21 @@
             <form method="POST" action="{% url 'register profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 <button type="submit" class="btn btn-secondary">Register</button>
             </form>
         </div>
 
-        <h5 style="margin-top: 10px">If you already have an account, <a href="{% url 'login profile' %}">login</a> instead.</h5>
+        <h5 style="margin-top: 10px">If you already have an account, <a href="{% url 'login profile' %}">login</a>
+            instead.</h5>
     </div>
 
 {% endblock %}

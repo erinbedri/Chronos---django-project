@@ -1,7 +1,7 @@
 import os
 
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -94,6 +94,12 @@ def login_profile(request):
     }
 
     return render(request, 'profile_login.html', context)
+
+
+def logout_profile(request):
+    logout(request)
+    messages.info(request, 'You are successfully logged out.')
+    return redirect('show homepage')
 
 
 def show_profile(request):
