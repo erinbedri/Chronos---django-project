@@ -95,8 +95,8 @@ class Watch(models.Model):
 
     DESCRIPTION_MAX_LEN = 200
 
-    owner = models.OneToOneField(
-        User, related_name='user',
+    owner = models.ForeignKey(
+        User,
         on_delete=CASCADE
     )
 
