@@ -44,16 +44,21 @@
                                 <div class="card">
                                     <img src="{{ watch.image.url }}" style="object-fit: cover; height: 150px" class=""
                                          alt="{{ watch.brand }} {{ watch.model }}">
+                                    {% if request.user.is_authenticated and request.user == watch.owner %}
+                                        <div class="card-img-overlay">
+                                            <span class="badge bg-secondary">Your Own</span>
+                                        </div>
+                                    {% endif %}
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ watch.brand }} {{ watch.model }} ({{ watch.year }})</h5>
-                                        <p class="card-text">{{ watch.condition|truncatechars:50 }}</p>
+                                        <h5 class="card-title">{{ watch.brand }} {{ watch.model }}
+                                            ({{ watch.year }})</h5>
+                                        <p class="card-text">{{ watch.condition|truncatechars:50 }}...</p>
                                         <a href="{% url 'show watch' watch.id %}" class="btn btn-secondary">Details</a>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
-
                 </div>
             </div>
         </div>
