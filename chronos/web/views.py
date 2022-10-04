@@ -1,9 +1,11 @@
 import os
 
+from django.contrib import messages
+from django.contrib.auth import login
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from chronos.web.forms import RegisterProfileForm, CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
-    DeleteProfileForm
+from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
+    DeleteProfileForm, NewUserForm
 from chronos.web.models import Profile, Watch
 
 
@@ -51,19 +53,19 @@ def show_dashboard(request):
 
 
 def register_profile(request):
-    profile = get_profile()
-
     if request.method == 'POST':
-        form = RegisterProfileForm(request.POST, request.FILES)
+        form = NewUserForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registration successful!')
             return redirect('show dashboard')
+        messages.error(request, 'Unsuccessful registration. Invalid information.')
     else:
-        form = RegisterProfileForm()
+        form = NewUserForm()
 
     context = {
         'form': form,
-        'profile': profile,
     }
 
     return render(request, 'profile_register.html', context)
