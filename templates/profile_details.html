@@ -15,13 +15,14 @@
                                         <p class="mb-2 pb-1" style="color: #2b2a2a;">
                                             <b>Username: </b>{{ profile.username }}
                                         </p>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;"><b>Email: </b>{{ profile.email }}
+                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">
+                                            <b>Email: </b>{{ profile.email }}
                                         </p>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;"><b>Total
-                                            Watches: </b>{{ watch_count }}
+                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">
+                                            <b>Watches in Collection:</b>{{ watch_count }}
                                         </p>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;"><b>Member
-                                            Since: </b>{{ profile.date_joined|date }}
+                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">
+                                            <b>Member Since: </b>{{ profile.date_joined|date }}
                                         </p>
                                         <div class="d-flex pt-1">
                                             <button type="button" onclick="location.href='{% url 'edit profile' %}'"
