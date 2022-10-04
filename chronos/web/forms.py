@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from chronos.web.models import Profile, Watch
+from chronos.web.models import Watch
 
 """
 class RegisterProfileForm(forms.ModelForm):
@@ -17,57 +17,57 @@ class NewUserForm(UserCreationForm):
         required=True,
         max_length=30,
         widget=forms.TextInput(
-                attrs={
-                    'placeholder': 'First Name',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'First Name',
+                'class': 'form-control',
+            }
         )
     )
     last_name = forms.CharField(
         required=True,
         max_length=30,
         widget=forms.TextInput(
-                attrs={
-                    'placeholder': 'Last Name',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Last Name',
+                'class': 'form-control',
+            }
         )
     )
     email = forms.EmailField(
         required=True,
         widget=forms.TextInput(
-                attrs={
-                    'placeholder': 'Email',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Email',
+                'class': 'form-control',
+            }
         )
     )
     username = forms.CharField(
         required=True,
         max_length=30,
         widget=forms.TextInput(
-                attrs={
-                    'placeholder': 'Username',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Username',
+                'class': 'form-control',
+            }
         )
     )
     password1 = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
-                attrs={
-                    'placeholder': 'Password',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Password',
+                'class': 'form-control',
+            }
         )
     )
     password2 = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
-                attrs={
-                    'placeholder': 'Confirm Password',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Confirm Password',
+                'class': 'form-control',
+            }
         )
     )
 
@@ -97,45 +97,77 @@ class NewUserForm(UserCreationForm):
 class PrettyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(
-                attrs={
-                    'placeholder': 'Username',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Username',
+                'class': 'form-control',
+            }
         )
     )
     password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
-                attrs={
-                    'placeholder': 'Password',
-                    'class': 'form-control',
-                }
+            attrs={
+                'placeholder': 'Password',
+                'class': 'form-control',
+            }
         )
     )
 
 
 class EditProfileForm(forms.ModelForm):
+    first_name = forms.CharField(
+        required=True,
+        max_length=30,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    last_name = forms.CharField(
+        required=True,
+        max_length=30,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    email = forms.EmailField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    username = forms.CharField(
+        required=True,
+        max_length=30,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+
     class Meta:
-        model = Profile
-        fields = ('__all__')
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')
+
 
 
 class DeleteProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = User
         fields = ()
 
 
 class CreateWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
-        fields = ('owner', 'brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
+        fields = ('brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
         widgets = {
-            'owner': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                }
-            ),
             'brand': forms.TextInput(
                 attrs={
                     'class': 'form-control'
@@ -190,13 +222,8 @@ class DeleteWatchForm(forms.ModelForm):
 class EditWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
-        fields = ('owner', 'brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
+        fields = ('brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
         widgets = {
-            'owner': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                }
-            ),
             'brand': forms.TextInput(
                 attrs={
                     'class': 'form-control'

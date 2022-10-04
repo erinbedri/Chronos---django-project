@@ -1,13 +1,25 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-
     <div class="container text-center text-md-start mt-5">
-        <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-secondary">Edit</button>
-        </form>
+        <div class="col-lg-4 col-lg-offset-4">
+            <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <button type="submit" class="btn btn-secondary">Edit</button>
+                <button type="button" onclick="location.href='{% url 'show profile' %}'"
+                        class="btn btn-danger flex-grow-1">Cancel</button>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

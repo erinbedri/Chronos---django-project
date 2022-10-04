@@ -2,32 +2,19 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm, NewUserForm, PrettyAuthenticationForm
-from chronos.web.models import Profile, Watch
-
-
-def get_profile():
-    profile = Profile.objects.all().first()
-    return profile
+from chronos.web.models import Watch
 
 
 def show_homepage(request):
-    profile = get_profile()
-
-    context = {
-        'profile': profile,
-    }
-
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def show_dashboard(request):
-    profile = get_profile()
-
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
 
     watches = Watch.objects \
@@ -44,7 +31,6 @@ def show_dashboard(request):
     styles = {watch.style for watch in Watch.objects.all()}
 
     context = {
-        'profile': profile,
         'watches': watches,
         'brands': brands,
         'styles': styles,
@@ -96,14 +82,16 @@ def login_profile(request):
     return render(request, 'profile_login.html', context)
 
 
+@login_required
 def logout_profile(request):
     logout(request)
     messages.info(request, 'You are successfully logged out.')
     return redirect('show homepage')
 
 
+@login_required
 def show_profile(request):
-    profile = get_profile()
+    profile = request.user
     watch_count = len(Watch.objects.filter(owner=profile))
 
     context = {
@@ -114,8 +102,9 @@ def show_profile(request):
     return render(request, 'profile_details.html', context)
 
 
+@login_required
 def edit_profile(request):
-    profile = get_profile()
+    profile = request.user
 
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=profile)
@@ -133,14 +122,13 @@ def edit_profile(request):
     return render(request, 'profile_edit.html', context)
 
 
+@login_required
 def delete_profile(request):
-    profile = get_profile()
+    profile = request.user
 
     if request.method == 'POST':
         form = DeleteProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            image_path = profile.image.path
-            os.remove(image_path)
             profile.delete()
             return redirect('show homepage')
     else:
@@ -154,13 +142,16 @@ def delete_profile(request):
     return render(request, 'profile_delete.html', context)
 
 
+@login_required
 def add_watch(request):
-    profile = get_profile()
+    profile = request.user
 
     if request.method == 'POST':
         form = CreateWatchForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            watch = form.save(commit=False)
+            watch.owner = request.user
+            watch.save()
             return redirect('show dashboard')
     else:
         form = CreateWatchForm()
@@ -174,19 +165,18 @@ def add_watch(request):
 
 
 def show_watch(request, pk):
-    profile = get_profile()
     watch = Watch.objects.get(pk=pk)
 
     context = {
         'watch': watch,
-        'profile': profile,
     }
 
     return render(request, 'watch_details.html', context)
 
 
+@login_required
 def edit_watch(request, pk):
-    profile = get_profile()
+    profile = request.user
     watch = Watch.objects.get(pk=pk)
 
     if request.method == 'POST':
@@ -206,8 +196,9 @@ def edit_watch(request, pk):
     return render(request, 'watch_edit.html', context)
 
 
+@login_required
 def delete_watch(request, pk):
-    profile = get_profile()
+    profile = request.user
     watch = Watch.objects.get(pk=pk)
 
     if request.method == 'POST':

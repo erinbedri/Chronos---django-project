@@ -1,13 +1,13 @@
 from datetime import date
 
 from django.contrib.auth.models import User
-from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import CASCADE
 
 from chronos.web.validators import file_size
 
-
+"""
 class Profile(models.Model):
     USERNAME_MAX_LEN = 30
 
@@ -64,7 +64,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
-
+"""
 
 class Watch(models.Model):
     BRAND_MAX_LEN = 30
@@ -95,8 +95,8 @@ class Watch(models.Model):
 
     DESCRIPTION_MAX_LEN = 200
 
-    owner = models.ForeignKey(
-        User,
+    owner = models.OneToOneField(
+        User, related_name='user',
         on_delete=CASCADE
     )
 
