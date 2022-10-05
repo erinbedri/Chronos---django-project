@@ -167,8 +167,17 @@ def add_watch(request):
 def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
 
+    if request.method == 'POST':
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show watch')
+    else:
+        form = CommentForm()
+
     context = {
         'watch': watch,
+        'comment_form': form,
     }
 
     return render(request, 'watch_details.html', context)
@@ -219,22 +228,3 @@ def delete_watch(request, pk):
 
     return render(request, 'watch_delete.html', context)
 
-
-@login_required
-def post_comment(request, pk):
-    watch = Watch.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        form = CommentForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('show watch')
-    else:
-        form = CommentForm()
-
-    context = {
-        'watch': watch,
-        'form': form
-    }
-
-    return render(request, 'watch_details.html', context)
