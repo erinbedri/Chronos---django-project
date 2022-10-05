@@ -64,28 +64,19 @@
                                    placeholder="{{ watch.updated_at|timesince }} ago">
                         </div>
                     </fieldset>
-
-                    {% if request.user.is_authenticated and request.user == watch.owner %}
-                        <button type="button" onclick="location.href='{% url 'edit watch' watch.id %}'"
-                                class="btn btn-outline-secondary me-1 flex-grow-1">Edit
-                        </button>
-                        <button type="button" onclick="location.href='{% url 'delete watch' watch.id %}'"
-                                class="btn btn-danger flex-grow-1">Delete
-                        </button>
-                    {% endif %}
-
                 </form>
             </div>
         </div>
     </div>
 
     <div class="container-sm" style="margin-top: 50px">
-        <h6>Comments:</h6>
+        <h6>Recent Comments</h6>
+
         {% if not comments %}
             <h6>There are no comments yet.</h6>
         {% else %}
             {% for comment in comments %}
-                <div class="card">
+                <div class="card" style="margin-top: 10px">
                     <div class="card-header">
                         {{ comment.author }} - {{ comment.created_on|timesince }} ago
                     </div>
@@ -95,15 +86,14 @@
                         </blockquote>
                     </div>
                 </div>
-                <hr>
             {% endfor %}
         {% endif %}
 
         {% if request.user.is_authenticated %}
-            <form method="POST" action="">
+            <form method="POST" style="margin-top: 20px;">
                 {% csrf_token %}
-                {{ comment_form|crispy }}
-                <button type="submit" class="btn btn-secondary">Comment</button>
+                {{ comment_form }}
+                <button type="submit" class="btn btn-secondary" style="margin-top: 10px">Comment</button>
             </form>
         {% endif %}
     </div>

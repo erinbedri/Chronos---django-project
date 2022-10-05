@@ -24,6 +24,7 @@ def show_dashboard(request):
             Q(style__icontains=q) |
             Q(year__icontains=q) |
             Q(condition__icontains=q) |
+            Q(owner_id=request.user.id) |
             Q(description__icontains=q))\
         .order_by('-created_at')
 

@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <div class="container text-center text-md-start mt-5">
-        <div class="col-lg-4 col-lg-offset-4">
-            <h4>Edit details of your watch</h4>
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-4">
+            <h3 style="margin-bottom: 20px">Edit details of your watch</h3>
             <form method="POST" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}

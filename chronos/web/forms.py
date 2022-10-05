@@ -195,7 +195,7 @@ class CreateWatchForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'rows': 2
+                    'rows': 3
                 }
             ),
             'image': forms.FileInput(
@@ -251,7 +251,7 @@ class EditWatchForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'rows': 2
+                    'rows': 3
                 }
             ),
             'image': forms.FileInput(
@@ -266,4 +266,16 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+        widgets = {
+            'body': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 2,
+                }
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['body'].label = 'Your comment'
 
