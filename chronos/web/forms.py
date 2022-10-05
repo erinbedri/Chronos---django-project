@@ -4,13 +4,6 @@ from django.contrib.auth.models import User
 
 from chronos.web.models import Watch
 
-"""
-class RegisterProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('__all__')
-"""
-
 
 class NewUserForm(UserCreationForm):
     first_name = forms.CharField(
@@ -19,7 +12,7 @@ class NewUserForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'First Name',
-                'class': 'form-control',
+
             }
         )
     )
@@ -37,7 +30,7 @@ class NewUserForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'Email',
+                'placeholder': 'Email Address',
                 'class': 'form-control',
             }
         )
@@ -77,12 +70,12 @@ class NewUserForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['first_name'].label = '*First Name'
-        self.fields['last_name'].label = "*Last Name"
-        self.fields['email'].label = '*Email Address'
-        self.fields['username'].label = "*Username"
-        self.fields['password1'].label = '*Password'
-        self.fields['password2'].label = "*Confirm Password"
+        self.fields['first_name'].label = 'First Name'
+        self.fields['last_name'].label = "Last Name"
+        self.fields['email'].label = 'Email Address'
+        self.fields['username'].label = "Username"
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = "Confirm Password"
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)

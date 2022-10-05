@@ -16,10 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'chronos.web',
+
     "crispy_forms",
     "crispy_bootstrap5",
-
-    'chronos.web',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
