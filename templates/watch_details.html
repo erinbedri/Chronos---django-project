@@ -72,6 +72,10 @@
                                 class="btn btn-danger flex-grow-1">Delete
                         </button>
                     {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        comment
+                    {% endif %}
                 </form>
             </div>
         </div>

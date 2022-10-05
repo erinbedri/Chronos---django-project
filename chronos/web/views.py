@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
-    DeleteProfileForm, NewUserForm, PrettyAuthenticationForm
+    DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, CommentForm
 from chronos.web.models import Watch
 
 
@@ -218,3 +218,23 @@ def delete_watch(request, pk):
     }
 
     return render(request, 'watch_delete.html', context)
+
+
+@login_required
+def post_comment(request, pk):
+    watch = Watch.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show watch')
+    else:
+        form = CommentForm()
+
+    context = {
+        'watch': watch,
+        'form': form
+    }
+
+    return render(request, 'watch_details.html', context)

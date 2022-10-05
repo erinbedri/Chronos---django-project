@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from chronos.web.models import Watch
+from chronos.web.models import Watch, Comment
 
 
 class NewUserForm(UserCreationForm):
@@ -260,3 +260,10 @@ class EditWatchForm(forms.ModelForm):
                 }
             )
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+

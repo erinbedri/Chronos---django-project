@@ -96,3 +96,29 @@ class Watch(models.Model):
 
     def __str__(self):
         return f'{self.brand} {self.model}'
+
+
+class Comment(models.Model):
+    COMMENT_MAX_MEN = 300
+
+    author = models.ForeignKey(
+        User,
+        on_delete=CASCADE,
+    )
+    watch = models.ForeignKey(
+        Watch,
+        on_delete=CASCADE,
+        related_name='comments'
+    )
+    body = models.TextField(
+        max_length=COMMENT_MAX_MEN,
+    )
+    created_on = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return f'Comment by {self.author}.'
