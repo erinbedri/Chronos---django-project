@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, CommentForm
-from chronos.web.models import Watch
+from chronos.web.models import Watch, Comment
 
 
 def show_homepage(request):
@@ -166,18 +166,23 @@ def add_watch(request):
 
 def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
+    comments = Comment.objects.filter(watch_id=pk)
 
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('show watch')
+            new_comment = form.save(commit=False)
+            new_comment.watch = watch
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect('show watch', pk)
     else:
         form = CommentForm()
 
     context = {
         'watch': watch,
         'comment_form': form,
+        'comments': comments,
     }
 
     return render(request, 'watch_details.html', context)
