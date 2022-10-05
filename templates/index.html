@@ -1,9 +1,22 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    
-    <div class="container text-center text-md-start mt-5">
-        <h3>Put here some info about the website</h3>
+
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-4 text-center">
+            <h2 class="lh-base">Find your dream watch on the leading collectors marketplace for vintage watches.</h2>
+        </div>
+
+        <div class="row d-flex justify-content-center" style="margin-top: 50px">
+            <div class="col-md-4 text-center">
+                <form class="d-flex">
+                    <a href="{% url 'show dashboard' %}"
+                       class="btn btn-secondary flex-grow-1">Search through {{ watch_count }} watches
+                        from {{ user_count }} users</a>
+
+                </form>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

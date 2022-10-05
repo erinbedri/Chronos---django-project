@@ -3,6 +3,7 @@ import os
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
@@ -11,7 +12,14 @@ from chronos.web.models import Watch, Comment
 
 
 def show_homepage(request):
-    return render(request, 'index.html')
+    watch_count = Watch.objects.all().count()
+    user_count = User.objects.all().count()
+
+    context = {
+        'watch_count': watch_count,
+        'user_count': user_count,
+    }
+    return render(request, 'index.html', context)
 
 
 def show_dashboard(request):
