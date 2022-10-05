@@ -6,15 +6,6 @@
             <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-danger">
-                            <strong>{{ message }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
                 <button type="submit" class="btn btn-secondary">Edit</button>
                 <button type="button" onclick="location.href='{% url 'show profile' %}'"
                         class="btn btn-danger flex-grow-1">Cancel</button>
