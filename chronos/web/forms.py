@@ -12,7 +12,7 @@ class NewUserForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'First Name',
-
+                'class': 'form-control',
             }
         )
     )

@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
 
 {% block content %}
 
@@ -7,7 +8,7 @@
             <h3>Login</h3>
             <form method="POST" action="{% url 'login profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
 
                 {% if messages %}
                     {% for message in messages %}
