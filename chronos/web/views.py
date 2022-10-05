@@ -24,8 +24,8 @@ def show_dashboard(request):
             Q(style__icontains=q) |
             Q(year__icontains=q) |
             Q(condition__icontains=q) |
-            Q(owner_id=request.user.id) |
-            Q(description__icontains=q))\
+            Q(description__icontains=q) |
+            Q(owner__username=q))\
         .order_by('-created_at')
 
     brands = {watch.brand for watch in Watch.objects.all()}
