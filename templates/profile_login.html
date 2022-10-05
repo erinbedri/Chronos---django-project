@@ -9,20 +9,11 @@
             <form method="POST" action="{% url 'login profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy }}
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-danger">
-                            <strong>{{ message }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
                 <button type="submit" class="btn btn-secondary">Login</button>
             </form>
 
             <h6 style="margin-top: 20px">If you don't have an account,
-                <a href="{% url 'register profile' %}">register</a>instead.</h6>
+                <a href="{% url 'register profile' %}">register</a> instead.</h6>
         </div>
 
 
