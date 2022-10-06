@@ -17,4 +17,5 @@ urlpatterns = [
     path('watch/details/<int:pk>', views.show_watch, name='show watch'),
     path('watch/edit/<int:pk>', views.edit_watch, name='edit watch'),
     path('watch/delete/<int:pk>', views.delete_watch, name='delete watch'),
+    path('watch/like/<int:pk>', views.like_watch, name='like watch'),
 ]

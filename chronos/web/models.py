@@ -86,6 +86,11 @@ class Watch(models.Model):
         )
     )
 
+    likes = models.ManyToManyField(
+        User,
+        related_name='watch_likes'
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -93,6 +98,9 @@ class Watch(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    def like_count(self):
+        return self.likes.count()
 
     def __str__(self):
         return f'{self.brand} {self.model}'

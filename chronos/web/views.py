@@ -5,7 +5,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
+
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, CommentForm
 from chronos.web.models import Watch, Comment
@@ -177,6 +180,11 @@ def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
     comments = Comment.objects.filter(watch_id=pk)
     comment_count = Comment.objects.filter(watch_id=pk).count()
+    like_count = Watch.like_count(watch)
+
+    liked = False
+    if watch.likes.filter(id=request.user.id).exists():
+        liked = True
 
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
@@ -194,6 +202,8 @@ def show_watch(request, pk):
         'comment_form': form,
         'comments': comments,
         'comment_count': comment_count,
+        'like_count': like_count,
+        'liked': liked,
     }
 
     return render(request, 'watch_details.html', context)
@@ -243,4 +253,20 @@ def delete_watch(request, pk):
     }
 
     return render(request, 'watch_delete.html', context)
+
+
+@login_required
+def like_watch(request, pk):
+    watch = Watch.objects.get(pk=pk)
+    liked = False
+
+    if watch.likes.filter(id=request.user.id).exists():
+        watch.likes.remove(request.user)
+        liked = False
+    else:
+        watch.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('show watch', args=[str(pk)]))
+
 
