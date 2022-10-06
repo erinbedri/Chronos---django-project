@@ -2,16 +2,23 @@
 
 {% block content %}
     <section id="delete-page" class="auth">
-        <form id="delete" method="POST" action="{% url 'delete watch' watch.id %}">
-            <div class="container">
+        <div class="row d-flex justify-content-center" style="margin-top: 50px">
+            <div class="col-md-5">
+                <form id="delete" method="POST" action="{% url 'delete watch' watch.id %}">
+                    <div class="container">
 
-                <h1>Delete Watch</h1>
+                        <h3>Are you sure you want to delete this watch?</h3>
 
-                {% csrf_token %}
-                {{ form }}
+                        {% csrf_token %}
+                        {{ form }}
 
-                <input class="btn btn-danger flex-grow-1" type="submit" value="Delete Watch">
+                        <input class="btn btn-danger flex-grow-1" type="submit" value="Delete Watch" style="margin-top: 20px">
+                        <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
+                                class="btn btn-secondary flex-grow-1" style="margin-top: 20px">Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </section>
 {% endblock %}

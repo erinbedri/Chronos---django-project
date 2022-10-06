@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
 
 {% block content %}
 
@@ -7,7 +8,7 @@
             <h3 style="margin-bottom: 20px">Edit details of your watch</h3>
             <form method="POST" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit" class="btn btn-secondary">Edit</button>
                 <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
                         class="btn btn-danger flex-grow-1">Cancel</button>

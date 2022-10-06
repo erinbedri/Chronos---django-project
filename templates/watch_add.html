@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
 
 {% block content %}
     <div class="row d-flex justify-content-center" style="margin-top: 50px">
@@ -6,7 +7,7 @@
             <h3 style="margin-bottom: 20px">Add a new watch to your collection</h3>
             <form method="POST" action="{% url 'add watch' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit" class="btn btn-secondary">Add</button>
                 <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
                         class="btn btn-danger flex-grow-1">Cancel</button>

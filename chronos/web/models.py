@@ -33,9 +33,9 @@ class Watch(models.Model):
 
     STYLE_MAX_LEN = max([len(style[1]) for style in WATCH_STYLES_CHOICES])
 
-    CONDITION_MAX_LEN = 50
+    CONDITION_MAX_LEN = 100
 
-    DESCRIPTION_MAX_LEN = 200
+    DESCRIPTION_MAX_LEN = 500
 
     owner = models.ForeignKey(
         User,

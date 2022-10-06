@@ -270,6 +270,7 @@ class CommentForm(forms.ModelForm):
             'body': forms.Textarea(
                 attrs={
                     'class': 'form-control',
+                    'placeholder': 'Your comment',
                     'rows': 2,
                 }
             ),
@@ -277,5 +278,5 @@ class CommentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['body'].label = 'Your comment'
+        self.fields['body'].label = 'Leave a Comment'
 

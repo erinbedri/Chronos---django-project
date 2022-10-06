@@ -176,6 +176,7 @@ def add_watch(request):
 def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
     comments = Comment.objects.filter(watch_id=pk)
+    comment_count = Comment.objects.filter(watch_id=pk).count()
 
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
@@ -192,6 +193,7 @@ def show_watch(request, pk):
         'watch': watch,
         'comment_form': form,
         'comments': comments,
+        'comment_count': comment_count,
     }
 
     return render(request, 'watch_details.html', context)
