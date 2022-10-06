@@ -52,6 +52,9 @@
                     </fieldset>
                 </form>
 
+                <h5><span class="badge text-bg-secondary"
+                      style="margin-bottom: 10px">Total Likes: {{ like_count }}</span></h5>
+
                 {% if request.user.is_authenticated %}
                     <form method="POST" action="{% url 'like watch' watch.id %}">
                         {% csrf_token %}
@@ -59,15 +62,11 @@
                             <button type="submit" name="watch_id" value="{watch.id" class="btn btn-secondary">Like
                             </button>
                         {% else %}
-                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-secondary">Dislike
+                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-danger">Dislike
                             </button>
                         {% endif %}
                     </form>
                 {% endif %}
-
-                <span class="badge rounded-pill text-bg-secondary"
-                      style="margin-top: 10px">Total Likes: {{ like_count }}</span>
-
             </div>
         </div>
     </div>
