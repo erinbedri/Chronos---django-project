@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
         <section class="vh-100">
             <div class="container py-5 h-40">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -11,18 +11,18 @@
                             <div class="card-body p-4">
                                 <div class="d-flex text-black">
                                     <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-1 pb-1">{{ profile.first_name }} {{ profile.last_name }}</h5>
+                                        <h5 class="mb-1 pb-1">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
                                         <p class="mb-2 pb-1" style="color: #2b2a2a;">
-                                            <b>Username: </b>{{ profile.username }}
+                                            <b>Username: </b>{{ request.user.username }}
                                         </p>
                                         <p class="mb-2 pb-1" style="color: #2b2a2a;">
-                                            <b>Email: </b>{{ profile.email }}
+                                            <b>Email: </b>{{ request.user.email }}
                                         </p>
                                         <p class="mb-2 pb-1" style="color: #2b2a2a;">
                                             <b>Watches in Collection: </b>{{ watch_count }}
                                         </p>
                                         <p class="mb-2 pb-1" style="color: #2b2a2a;">
-                                            <b>Member Since: </b>{{ profile.date_joined|date }}
+                                            <b>Member Since: </b>{{ request.user.date_joined|date }}
                                         </p>
                                         <div class="d-flex pt-1">
                                             <button type="button" onclick="location.href='{% url 'edit profile' %}'"

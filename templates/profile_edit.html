@@ -1,11 +1,12 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
 
 {% block content %}
     <div class="container text-center text-md-start mt-5">
         <div class="col-lg-4 col-lg-offset-4">
             <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit" class="btn btn-secondary">Edit</button>
                 <button type="button" onclick="location.href='{% url 'show profile' %}'"
                         class="btn btn-danger flex-grow-1">Cancel</button>

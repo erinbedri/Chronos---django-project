@@ -15,7 +15,6 @@ from chronos.web.models import Watch, WatchComment, Post, PostComment
 
 def show_homepage(request):
     posts = Post.objects.all()
-
     context = {
         'posts': posts,
     }
@@ -44,7 +43,6 @@ def show_dashboard(request):
         'brands': brands,
         'styles': styles,
     }
-
     return render(request, 'dashboard.html', context)
 
 
@@ -63,7 +61,6 @@ def register_profile(request):
     context = {
         'form': form,
     }
-
     return render(request, 'profile_register.html', context)
 
 
@@ -87,7 +84,6 @@ def login_profile(request):
     context = {
         'form': form,
     }
-
     return render(request, 'profile_login.html', context)
 
 
@@ -100,61 +96,48 @@ def logout_profile(request):
 
 @login_required
 def show_profile(request):
-    profile = request.user
-    watch_count = len(Watch.objects.filter(owner=profile))
+    watch_count = len(Watch.objects.filter(owner=request.user))
 
     context = {
-        'profile': profile,
         'watch_count': watch_count,
     }
-
     return render(request, 'profile_details.html', context)
 
 
 @login_required
 def edit_profile(request):
-    profile = request.user
-
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, request.FILES, instance=profile)
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('show profile')
     else:
-        form = EditProfileForm(instance=profile)
+        form = EditProfileForm(instance=request.user)
 
     context = {
-        'profile': profile,
         'form': form
     }
-
     return render(request, 'profile_edit.html', context)
 
 
 @login_required
 def delete_profile(request):
-    profile = request.user
-
     if request.method == 'POST':
-        form = DeleteProfileForm(request.POST, request.FILES, instance=profile)
+        form = DeleteProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            profile.delete()
+            request.user.delete()
             return redirect('show homepage')
     else:
-        form = DeleteProfileForm(instance=profile)
+        form = DeleteProfileForm(instance=request.user)
 
     context = {
-        'profile': profile,
         'form': form
     }
-
     return render(request, 'profile_delete.html', context)
 
 
 @login_required
 def add_watch(request):
-    profile = request.user
-
     if request.method == 'POST':
         form = CreateWatchForm(request.POST, request.FILES)
         if form.is_valid():
@@ -167,9 +150,7 @@ def add_watch(request):
 
     context = {
         'form': form,
-        'profile': profile,
     }
-
     return render(request, 'watch_add.html', context)
 
 
@@ -202,13 +183,11 @@ def show_watch(request, pk):
         'like_count': like_count,
         'liked': liked,
     }
-
     return render(request, 'watch_details.html', context)
 
 
 @login_required
 def edit_watch(request, pk):
-    profile = request.user
     watch = Watch.objects.get(pk=pk)
 
     if request.method == 'POST':
@@ -221,16 +200,13 @@ def edit_watch(request, pk):
 
     context = {
         'watch': watch,
-        'profile': profile,
         'form': form
     }
-
     return render(request, 'watch_edit.html', context)
 
 
 @login_required
 def delete_watch(request, pk):
-    profile = request.user
     watch = Watch.objects.get(pk=pk)
 
     if request.method == 'POST':
@@ -245,10 +221,8 @@ def delete_watch(request, pk):
 
     context = {
         'watch': watch,
-        'profile': profile,
         'form': form
     }
-
     return render(request, 'watch_delete.html', context)
 
 
@@ -269,7 +243,6 @@ def like_watch(request, pk):
 
 def show_post(request, pk):
     post = Post.objects.get(pk=pk)
-
     comments = PostComment.objects.filter(post_id=pk)
     comment_count = PostComment.objects.filter(post_id=pk).count()
 
@@ -290,5 +263,4 @@ def show_post(request, pk):
         'comments': comments,
         'comment_count': comment_count,
     }
-
     return render(request, 'post_details.html', context)
