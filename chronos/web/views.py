@@ -18,7 +18,7 @@ def show_homepage(request):
     context = {
         'posts': posts,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'common/index.html', context)
 
 
 def show_dashboard(request):
@@ -43,7 +43,7 @@ def show_dashboard(request):
         'brands': brands,
         'styles': styles,
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'common/dashboard.html', context)
 
 
 def register_profile(request):
@@ -61,7 +61,7 @@ def register_profile(request):
     context = {
         'form': form,
     }
-    return render(request, 'profile_register.html', context)
+    return render(request, 'profile/profile_register.html', context)
 
 
 def login_profile(request):
@@ -84,7 +84,7 @@ def login_profile(request):
     context = {
         'form': form,
     }
-    return render(request, 'profile_login.html', context)
+    return render(request, 'profile/profile_login.html', context)
 
 
 @login_required
@@ -101,7 +101,7 @@ def show_profile(request):
     context = {
         'watch_count': watch_count,
     }
-    return render(request, 'profile_details.html', context)
+    return render(request, 'profile/profile_details.html', context)
 
 
 @login_required
@@ -117,7 +117,7 @@ def edit_profile(request):
     context = {
         'form': form
     }
-    return render(request, 'profile_edit.html', context)
+    return render(request, 'profile/profile_edit.html', context)
 
 
 @login_required
@@ -133,7 +133,7 @@ def delete_profile(request):
     context = {
         'form': form
     }
-    return render(request, 'profile_delete.html', context)
+    return render(request, 'profile/profile_delete.html', context)
 
 
 @login_required
@@ -151,7 +151,7 @@ def add_watch(request):
     context = {
         'form': form,
     }
-    return render(request, 'watch_add.html', context)
+    return render(request, 'watch/watch_add.html', context)
 
 
 def show_watch(request, pk):
@@ -183,7 +183,7 @@ def show_watch(request, pk):
         'like_count': like_count,
         'liked': liked,
     }
-    return render(request, 'watch_details.html', context)
+    return render(request, 'watch/watch_details.html', context)
 
 
 @login_required
@@ -202,7 +202,7 @@ def edit_watch(request, pk):
         'watch': watch,
         'form': form
     }
-    return render(request, 'watch_edit.html', context)
+    return render(request, 'watch/watch_edit.html', context)
 
 
 @login_required
@@ -223,7 +223,7 @@ def delete_watch(request, pk):
         'watch': watch,
         'form': form
     }
-    return render(request, 'watch_delete.html', context)
+    return render(request, 'watch/watch_delete.html', context)
 
 
 @login_required
@@ -263,4 +263,4 @@ def show_post(request, pk):
         'comments': comments,
         'comment_count': comment_count,
     }
-    return render(request, 'post_details.html', context)
+    return render(request, 'post/post_details.html', context)
