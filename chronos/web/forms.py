@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from chronos.web.models import Watch, Comment
 
@@ -86,6 +87,15 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError('Email already exists')
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('Username already exists')
+        return self.cleaned_data
+
 
 class PrettyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
@@ -147,7 +157,6 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email')
-
 
 
 class DeleteProfileForm(forms.ModelForm):

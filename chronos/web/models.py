@@ -99,6 +99,9 @@ class Watch(models.Model):
         auto_now=True
     )
 
+    class Meta:
+        verbose_name_plural = "watches"
+
     def like_count(self):
         return self.likes.count()
 
