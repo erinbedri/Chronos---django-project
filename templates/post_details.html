@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-8">
+            <h5>{{ post.title }}</h5>
+            <p>{{ post.created_on|date }}</p>
+            <p>By {{ post.author }}</p>
+
+            <p>{{ post.content|linebreaks }}</p>
+        </div>
+    </div>
+{% endblock %}

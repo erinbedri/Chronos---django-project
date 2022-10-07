@@ -3,7 +3,6 @@ import os
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -11,16 +10,14 @@ from django.urls import reverse
 
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
     DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, CommentForm
-from chronos.web.models import Watch, Comment
+from chronos.web.models import Watch, Comment, Post
 
 
 def show_homepage(request):
-    watch_count = Watch.objects.all().count()
-    user_count = User.objects.all().count()
+    posts = Post.objects.all()
 
     context = {
-        'watch_count': watch_count,
-        'user_count': user_count,
+        'posts': posts,
     }
     return render(request, 'index.html', context)
 
@@ -270,3 +267,11 @@ def like_watch(request, pk):
     return HttpResponseRedirect(reverse('show watch', args=[str(pk)]))
 
 
+def show_post(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    context = {
+        'post': post,
+    }
+
+    return render(request, 'post_details.html', context)

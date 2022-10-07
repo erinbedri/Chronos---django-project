@@ -133,3 +133,31 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author}.'
+
+
+class Post(models.Model):
+    TITLE_MAX_LEN = 200
+
+    title = models.CharField(
+        max_length=TITLE_MAX_LEN,
+        unique=True,
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=CASCADE,
+        related_name='blog_posts',
+    )
+    content = models.TextField()
+    created_on = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated_on = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title
+
