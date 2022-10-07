@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="row d-flex justify-content-center" style="margin-top: 50px">
-        <div class="col-md-8">
+        <div class="col-sm-6">
             {% if posts %}
                 {% for post in posts %}
-                    <div class="card text-center" style="margin-bottom: 20px">
+                    <div class="card text-left" style="margin-bottom: 20px">
                         <div class="card-header">
-                            By {{ post.author }}
+                            By {{ post.author|upper }}
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ post.title }}</h5>
@@ -15,7 +15,7 @@
                             <a href="{% url 'show post' post.id %}" class="btn btn-secondary">Read More</a>
                         </div>
                         <div class="card-footer text-muted">
-                            {{ post.created_on|timesince }} ago
+                            Published {{ post.created_on|timesince }} ago
                         </div>
                     </div>
                 {% endfor %}

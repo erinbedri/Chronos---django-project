@@ -9,8 +9,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from chronos.web.forms import CreateWatchForm, DeleteWatchForm, EditWatchForm, EditProfileForm, \
-    DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, CommentForm
-from chronos.web.models import Watch, Comment, Post
+    DeleteProfileForm, NewUserForm, PrettyAuthenticationForm, WatchCommentForm, PostCommentForm
+from chronos.web.models import Watch, WatchComment, Post, PostComment
 
 
 def show_homepage(request):
@@ -175,8 +175,8 @@ def add_watch(request):
 
 def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
-    comments = Comment.objects.filter(watch_id=pk)
-    comment_count = Comment.objects.filter(watch_id=pk).count()
+    comments = WatchComment.objects.filter(watch_id=pk)
+    comment_count = WatchComment.objects.filter(watch_id=pk).count()
     like_count = Watch.like_count(watch)
 
     liked = False
@@ -184,7 +184,7 @@ def show_watch(request, pk):
         liked = True
 
     if request.method == 'POST':
-        form = CommentForm(data=request.POST)
+        form = WatchCommentForm(data=request.POST)
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.watch = watch
@@ -192,7 +192,7 @@ def show_watch(request, pk):
             new_comment.save()
             return redirect('show watch', pk)
     else:
-        form = CommentForm()
+        form = WatchCommentForm()
 
     context = {
         'watch': watch,
@@ -270,8 +270,25 @@ def like_watch(request, pk):
 def show_post(request, pk):
     post = Post.objects.get(pk=pk)
 
+    comments = PostComment.objects.filter(post_id=pk)
+    comment_count = PostComment.objects.filter(post_id=pk).count()
+
+    if request.method == 'POST':
+        form = PostCommentForm(data=request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.post = post
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect('show post', pk)
+    else:
+        form = PostCommentForm()
+
     context = {
         'post': post,
+        'form': form,
+        'comments': comments,
+        'comment_count': comment_count,
     }
 
     return render(request, 'post_details.html', context)
