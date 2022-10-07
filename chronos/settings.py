@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'chronos.web',
     'chronos.post',
     'chronos.user_profile',
+    'chronos.watch',
 
     "crispy_forms",
     "crispy_bootstrap5",
