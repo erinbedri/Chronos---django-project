@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from chronos.web.models import Watch, WatchComment, PostComment
+from chronos.web.models import Watch, WatchComment
 
 
 class NewUserForm(UserCreationForm):
@@ -290,20 +290,3 @@ class WatchCommentForm(forms.ModelForm):
         self.fields['body'].label = 'Leave a Comment'
 
 
-class PostCommentForm(forms.ModelForm):
-    class Meta:
-        model = PostComment
-        fields = ('body',)
-        widgets = {
-            'body': forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Your comment',
-                    'rows': 2,
-                }
-            ),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['body'].label = 'Leave a Comment'

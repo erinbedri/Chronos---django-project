@@ -1,9 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 
 from chronos.web import views
 
 urlpatterns = [
     path('', views.show_homepage, name='show homepage'),
+
+    path('post/', include('chronos.post.urls')),
 
     path('profile/register/', views.register_profile, name='register profile'),
     path('profile/login/', views.login_profile, name='login profile'),
@@ -18,6 +20,4 @@ urlpatterns = [
     path('watch/edit/<int:pk>', views.edit_watch, name='edit watch'),
     path('watch/delete/<int:pk>', views.delete_watch, name='delete watch'),
     path('watch/like/<int:pk>', views.like_watch, name='like watch'),
-
-    path('post/details/<int:pk>', views.show_post, name='show post'),
 ]

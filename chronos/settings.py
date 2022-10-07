@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'chronos.web',
+    'chronos.post',
 
     "crispy_forms",
     "crispy_bootstrap5",

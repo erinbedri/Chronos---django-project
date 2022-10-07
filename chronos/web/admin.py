@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from chronos.web.models import Watch, WatchComment, Post, PostComment
+from chronos.web.models import Watch, WatchComment
 
 
 @admin.register(Watch)
@@ -13,11 +13,3 @@ class WatchCommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'watch', 'created_on')
 
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_on')
-
-
-@admin.register(PostComment)
-class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ('author', 'post', 'created_on')
