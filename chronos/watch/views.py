@@ -1,5 +1,6 @@
 import os
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -8,6 +9,12 @@ from django.urls import reverse
 
 from chronos.watch.forms import CreateWatchForm, WatchCommentForm, EditWatchForm, DeleteWatchForm
 from chronos.watch.models import Watch, WatchComment
+
+WATCH_ADD_SUCCESS_MESSAGE = 'The watch was successfully added!'
+
+WATCH_EDIT_SUCCESS_MESSAGE = 'The watch was successfully updated!'
+
+WATCH_DELETE_SUCCESS_MESSAGE = 'The watch was successfully deleted!'
 
 
 def show_all_watches(request):
@@ -43,6 +50,7 @@ def add_watch(request):
             watch = form.save(commit=False)
             watch.owner = request.user
             watch.save()
+            messages.success(request, WATCH_ADD_SUCCESS_MESSAGE)
             return redirect('show dashboard')
     else:
         form = CreateWatchForm()
@@ -93,6 +101,7 @@ def edit_watch(request, pk):
         form = EditWatchForm(request.POST, request.FILES, instance=watch)
         if form.is_valid():
             form.save()
+            messages.success(request, WATCH_EDIT_SUCCESS_MESSAGE)
             return redirect('show dashboard')
     else:
         form = EditWatchForm(instance=watch)
@@ -114,6 +123,7 @@ def delete_watch(request, pk):
             image_path = watch.image.path
             os.remove(image_path)
             watch.delete()
+            messages.success(request, WATCH_DELETE_SUCCESS_MESSAGE)
             return redirect('show dashboard')
     else:
         form = DeleteWatchForm(instance=watch)
