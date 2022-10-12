@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from chronos.user_profile.forms import NewUserForm, PrettyAuthenticationForm, EditProfileForm, DeleteProfileForm
+from chronos.watch.models import Watch
 
 
 def register_profile(request):
@@ -36,7 +37,7 @@ def login_profile(request):
                 messages.info(request, f'You are now logged in as {username}!')
                 return redirect('show dashboard')
             else:
-                messages.error(request, 'Invalid username or password!')
+                messages.error(request, f'Invalid username or password!')
         else:
             messages.error(request, 'Invalid username or password!')
     form = PrettyAuthenticationForm()
