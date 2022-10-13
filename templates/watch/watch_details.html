@@ -79,8 +79,8 @@
         {% else %}
             {% for comment in comments %}
                 <div class="card" style="margin-top: 10px">
-                    <div class="card-header">
-                        <span class="badge text-bg-secondary" style="margin-right: 10px">{{ forloop.counter }}</span>
+                    <div class="card-header" style="background-color: #FFF1C6">
+                        <span class="badge text-bg-warning" style="margin-right: 10px">{{ forloop.counter }}</span>
                         <small><b>{{ comment.author }}</b> said {{ comment.created_on|timesince }} ago</small>
                     </div>
                     <div class="card-body">
@@ -97,7 +97,7 @@
             <form method="POST" style="margin-top: 40px;">
                 {% csrf_token %}
                 {{ comment_form }}
-                <button type="submit" class="btn btn-secondary" style="margin-top: 10px">Submit</button>
+                <button type="submit" class="btn btn-warning" style="margin-top: 10px">Submit</button>
             </form>
         {% endif %}
     </div>

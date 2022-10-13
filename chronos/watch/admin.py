@@ -10,4 +10,4 @@ class WatchAdmin(admin.ModelAdmin):
 
 @admin.register(WatchComment)
 class WatchCommentAdmin(admin.ModelAdmin):
-    list_display = ('author', 'watch', 'created_on')
+    list_display = ('author', 'body', 'watch', 'created_on')

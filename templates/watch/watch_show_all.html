@@ -54,7 +54,7 @@
                                          alt="{{ watch.brand }} {{ watch.model }}">
                                     {% if request.user.is_authenticated and request.user == watch.owner %}
                                         <div class="card-img-overlay">
-                                            <span class="badge bg-secondary">My Own</span>
+                                            <span class="badge bg-warning">My Own</span>
                                         </div>
                                     {% endif %}
                                     <div class="card-body">
