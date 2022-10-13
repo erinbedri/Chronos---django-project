@@ -22,13 +22,13 @@ def show_all_watches(request):
 
     watches = Watch.objects \
         .filter(
-            Q(brand__icontains=q) |
-            Q(model__icontains=q) |
-            Q(style__icontains=q) |
-            Q(year__icontains=q) |
-            Q(condition__icontains=q) |
-            Q(description__icontains=q) |
-            Q(owner__username=q))\
+        Q(brand__icontains=q) |
+        Q(model__icontains=q) |
+        Q(style__icontains=q) |
+        Q(year__icontains=q) |
+        Q(condition__icontains=q) |
+        Q(description__icontains=q) |
+        Q(owner__username=q)) \
         .order_by('-created_at')
 
     brands = {watch.brand for watch in Watch.objects.all()}
@@ -39,6 +39,7 @@ def show_all_watches(request):
         'brands': brands,
         'styles': styles,
     }
+
     return render(request, 'common/../../templates/watch/watch_show_all.html', context)
 
 
@@ -97,6 +98,9 @@ def show_watch(request, pk):
 def edit_watch(request, pk):
     watch = get_object_or_404(Watch, pk=pk)
 
+    if request.user != watch.owner:
+        return render(request, '403.html')
+
     if request.method == 'POST':
         form = EditWatchForm(request.POST, request.FILES, instance=watch)
         if form.is_valid():
@@ -110,12 +114,16 @@ def edit_watch(request, pk):
         'watch': watch,
         'form': form
     }
+
     return render(request, 'watch/watch_edit.html', context)
 
 
 @login_required
 def delete_watch(request, pk):
     watch = get_object_or_404(Watch, pk=pk)
+
+    if request.user != watch.owner:
+        return render(request, '403.html')
 
     if request.method == 'POST':
         form = DeleteWatchForm(request.POST, request.FILES, instance=watch)
@@ -132,6 +140,7 @@ def delete_watch(request, pk):
         'watch': watch,
         'form': form
     }
+
     return render(request, 'watch/watch_delete.html', context)
 
 
