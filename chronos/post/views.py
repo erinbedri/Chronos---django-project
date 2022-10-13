@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 
 from chronos.post.forms import PostCommentForm
 from chronos.post.models import Post, PostComment
 
 
 def show_post(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     comments = PostComment.objects.filter(post_id=pk).order_by('created_on')
     comment_count = PostComment.objects.filter(post_id=pk).count()
 

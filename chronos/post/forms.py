@@ -19,4 +19,4 @@ class PostCommentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['body'].label = 'Leave a Comment'
+        self.fields['body'].label = ''
