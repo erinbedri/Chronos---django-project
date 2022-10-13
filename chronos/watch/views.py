@@ -63,7 +63,7 @@ def add_watch(request):
 
 def show_watch(request, pk):
     watch = Watch.objects.get(pk=pk)
-    comments = WatchComment.objects.filter(watch_id=pk)
+    comments = WatchComment.objects.filter(watch_id=pk).order_by('created_on')
     comment_count = WatchComment.objects.filter(watch_id=pk).count()
     like_count = Watch.like_count(watch)
 

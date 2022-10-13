@@ -6,7 +6,7 @@ from chronos.post.models import Post, PostComment
 
 def show_post(request, pk):
     post = Post.objects.get(pk=pk)
-    comments = PostComment.objects.filter(post_id=pk)
+    comments = PostComment.objects.filter(post_id=pk).order_by('created_on')
     comment_count = PostComment.objects.filter(post_id=pk).count()
 
     if request.method == 'POST':
