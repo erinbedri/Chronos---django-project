@@ -80,7 +80,7 @@
             {% for comment in comments %}
                 <div class="card" style="margin-top: 10px">
                     <div class="card-header">
-                        <span class="badge text-bg-secondary">{{ forloop.counter }}</span>
+                        <span class="badge text-bg-secondary" style="margin-right: 10px">{{ forloop.counter }}</span>
                         <small><b>{{ comment.author }}</b> said {{ comment.created_on|timesince }} ago</small>
                     </div>
                     <div class="card-body">
