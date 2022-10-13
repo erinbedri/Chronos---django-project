@@ -11,8 +11,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ post.title }}</h5>
-                            <p class="card-text">{{ post.content|truncatewords:30 }}</p>
-                            <a href="{% url 'show post' post.id %}" class="btn btn-secondary">Read More</a>
+                            <a href="{% url 'show post' post.id %}" style="margin-top: 10px" class="btn btn-secondary">Read
+                                Article</a>
                         </div>
                         <div class="card-footer text-muted">
                             Published {{ post.created_on|timesince }} ago

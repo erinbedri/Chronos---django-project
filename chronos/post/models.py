@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CASCADE
@@ -15,7 +16,7 @@ class Post(models.Model):
         on_delete=CASCADE,
         related_name='blog_posts',
     )
-    content = models.TextField()
+    content = RichTextField()
     created_on = models.DateTimeField(
         auto_now_add=True,
     )
