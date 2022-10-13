@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from chronos.watch.forms import CreateWatchForm, WatchCommentForm, EditWatchForm, DeleteWatchForm
@@ -62,7 +62,7 @@ def add_watch(request):
 
 
 def show_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
+    watch = get_object_or_404(Watch, pk=pk)
     comments = WatchComment.objects.filter(watch_id=pk).order_by('created_on')
     comment_count = WatchComment.objects.filter(watch_id=pk).count()
     like_count = Watch.like_count(watch)
@@ -95,7 +95,7 @@ def show_watch(request, pk):
 
 @login_required
 def edit_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
+    watch = get_object_or_404(Watch, pk=pk)
 
     if request.method == 'POST':
         form = EditWatchForm(request.POST, request.FILES, instance=watch)
@@ -115,7 +115,7 @@ def edit_watch(request, pk):
 
 @login_required
 def delete_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
+    watch = get_object_or_404(Watch, pk=pk)
 
     if request.method == 'POST':
         form = DeleteWatchForm(request.POST, request.FILES, instance=watch)
@@ -137,7 +137,7 @@ def delete_watch(request, pk):
 
 @login_required
 def like_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
+    watch = get_object_or_404(Watch, pk=pk)
     liked = False
 
     if watch.likes.filter(id=request.user.id).exists():

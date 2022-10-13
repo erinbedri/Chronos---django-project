@@ -73,7 +73,7 @@ def logout_profile(request):
 
 @login_required
 def show_profile(request):
-    watch_count = len(Watch.objects.filter(owner=request.user))
+    watch_count = Watch.objects.filter(owner=request.user).count()
 
     context = {
         'watch_count': watch_count,
