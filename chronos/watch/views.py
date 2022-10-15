@@ -17,7 +17,7 @@ WATCH_EDIT_SUCCESS_MESSAGE = 'The watch was successfully updated!'
 
 WATCH_DELETE_SUCCESS_MESSAGE = 'The watch was successfully deleted!'
 
-WATCHES_PER_PAGE = 2
+WATCHES_PER_PAGE = 8
 
 
 def show_all_watches(request):

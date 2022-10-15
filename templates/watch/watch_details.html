@@ -52,14 +52,14 @@
                     </fieldset>
                 </form>
 
-                <h5><span class="badge text-bg-secondary"
+                <h5><span class="badge bg-warning"
                           style="margin-bottom: 10px">Total Likes: {{ like_count }}</span></h5>
 
                 {% if request.user.is_authenticated %}
                     <form method="POST" action="{% url 'like watch' watch.id %}">
                         {% csrf_token %}
                         {% if not liked %}
-                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-secondary">Like
+                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-warning">Like
                             </button>
                         {% else %}
                             <button type="submit" name="watch_id" value="{watch.id" class="btn btn-danger">Dislike
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="container-sm" style="margin-top: 50px">
+    <div class="container-sm" style="margin-top: 50px; margin-bottom: 50px">
         <h6>Comments ({{ comment_count }})</h6>
 
         {% if not comments %}
@@ -80,7 +80,7 @@
             {% for comment in comments %}
                 <div class="card" style="margin-top: 10px">
                     <div class="card-header" style="background-color: #FFF1C6">
-                        <span class="badge text-bg-warning" style="margin-right: 10px">{{ forloop.counter }}</span>
+                        <span class="badge bg-warning" style="margin-right: 10px">{{ forloop.counter }}</span>
                         <small><b>{{ comment.author }}</b> said {{ comment.created_on|timesince }} ago</small>
                     </div>
                     <div class="card-body">
