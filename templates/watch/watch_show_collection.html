@@ -19,7 +19,7 @@
                 <tbody>
 
                 {% for watch in watches %}
-                    <tr>
+                    <tr onclick="window.location='{% url "show watch" watch.id %}';">
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ watch.brand }}</td>
                         <td>{{ watch.model }}</td>
