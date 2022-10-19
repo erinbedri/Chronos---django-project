@@ -1,4 +1,6 @@
 {% extends 'common/base.html' %}
+{% load humanize %}
+
 
 {% block content %}
     <div class="row d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 50px">
@@ -14,6 +16,8 @@
                     <th scope="col">Reference Number</th>
                     <th scope="col">Year</th>
                     <th scope="col">Style</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Price Paid</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,11 +30,16 @@
                         <td>{{ watch.reference_number }}</td>
                         <td>{{ watch.year }}</td>
                         <td>{{ watch.style }}</td>
+                        <td>{{ watch.like_count }}</td>
+                        <td>EUR {{ watch.price_paid|floatformat:2|intcomma }}</td>
                     </tr>
                 {% endfor %}
 
                 </tbody>
             </table>
+
+            <h5 style="text-align: right; margin-top: 25px">Total Paid: EUR {{ total_price_paid|floatformat:2|intcomma }}</h5>
+
         </div>
     </div>
 

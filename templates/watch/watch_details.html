@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load humanize %}
 {% load crispy_forms_filters %}
 
 {% block content %}
@@ -38,6 +39,11 @@
                             <label for="disabledSelect" class="form-label">Style</label>
                             <input type="text" id="disabledTextInput" class="form-control"
                                    placeholder="{{ watch.style }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Price Paid in EUR</label>
+                            <input type="number" id="disabledTextInput" class="form-control"
+                                   placeholder="{{ watch.price_paid|floatformat:2|intcomma }}">
                         </div>
                         <div class="mb-3">
                             <label for="disabledSelect" class="form-label">Condition</label>

@@ -6,7 +6,8 @@ from chronos.watch.models import Watch, WatchComment
 class CreateWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
-        fields = ('brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
+        fields = (
+        'brand', 'model', 'reference_number', 'year', 'style', 'price_paid', 'condition', 'description', 'image')
         widgets = {
             'brand': forms.TextInput(
                 attrs={
@@ -29,6 +30,11 @@ class CreateWatchForm(forms.ModelForm):
                 }
             ),
             'style': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'price_paid': forms.NumberInput(
                 attrs={
                     'class': 'form-control'
                 }
@@ -62,7 +68,7 @@ class DeleteWatchForm(forms.ModelForm):
 class EditWatchForm(forms.ModelForm):
     class Meta:
         model = Watch
-        fields = ('brand', 'model', 'reference_number', 'year', 'style', 'condition', 'description', 'image')
+        fields = ('brand', 'model', 'reference_number', 'year', 'style', 'price_paid', 'condition', 'description', 'image')
         widgets = {
             'brand': forms.TextInput(
                 attrs={
@@ -89,6 +95,11 @@ class EditWatchForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
+            'price_paid': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
             'condition': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -107,6 +118,10 @@ class EditWatchForm(forms.ModelForm):
                 }
             )
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['price_paid'].label = 'Price paid in EUR'
 
 
 class WatchCommentForm(forms.ModelForm):

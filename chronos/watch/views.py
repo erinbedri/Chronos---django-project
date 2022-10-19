@@ -59,9 +59,11 @@ def show_all_watches(request):
 
 def show_my_watches(request):
     watches = Watch.objects.filter(owner_id=request.user.id).order_by('created_at')
+    total_price_paid = sum([watch.price_paid for watch in watches])
 
     context = {
         'watches': watches,
+        'total_price_paid': total_price_paid,
     }
 
     return render(request, 'watch/watch_show_collection.html', context)

@@ -73,6 +73,8 @@ class Watch(models.Model):
         max_length=CONDITION_MAX_LEN,
     )
 
+    price_paid = models.FloatField()
+
     description = models.TextField(
         null=True,
         blank=True,
