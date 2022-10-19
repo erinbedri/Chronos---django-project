@@ -59,14 +59,26 @@
                     <form method="POST" action="{% url 'like watch' watch.id %}">
                         {% csrf_token %}
                         {% if not liked %}
-                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-warning">Like
+                            <button type="submit" name="watch_id" value="watch.id" class="btn btn-warning">Like
                             </button>
                         {% else %}
-                            <button type="submit" name="watch_id" value="{watch.id" class="btn btn-danger">Dislike
+                            <button type="submit" name="watch_id" value="watch.id" class="btn btn-danger">Dislike
                             </button>
                         {% endif %}
                     </form>
                 {% endif %}
+
+                <div style="margin-top: 15px">
+                    {% if request.user.is_authenticated and request.user == watch.owner %}
+                        <a href="{% url 'edit watch' watch.id %}"
+                           class="btn btn-secondary"
+                           style="position: relative;">Edit</a>
+                        <a href="{% url 'delete watch' watch.id %}"
+                           class="btn btn-outline-danger"
+                           style="position: relative;">Delete</a>
+                    {% endif %}
+                </div>
+
             </div>
         </div>
     </div>

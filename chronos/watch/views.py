@@ -54,7 +54,17 @@ def show_all_watches(request):
         'styles': styles,
     }
 
-    return render(request, 'common/../../templates/watch/watch_show_all.html', context)
+    return render(request, 'watch/watch_show_all.html', context)
+
+
+def show_my_watches(request):
+    watches = Watch.objects.filter(owner_id=request.user.id).order_by('created_at')
+
+    context = {
+        'watches': watches,
+    }
+
+    return render(request, 'watch/watch_show_collection.html', context)
 
 
 @login_required

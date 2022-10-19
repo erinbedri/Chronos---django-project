@@ -1,0 +1,37 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 50px">
+        <div class="col-md-10">
+            <h3 style="margin-bottom: 20px">My Collection</h3>
+
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Reference Number</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Style</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for watch in watches %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ watch.brand }}</td>
+                        <td>{{ watch.model }}</td>
+                        <td>{{ watch.reference_number }}</td>
+                        <td>{{ watch.year }}</td>
+                        <td>{{ watch.style }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
