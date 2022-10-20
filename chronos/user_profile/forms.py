@@ -50,6 +50,8 @@ class NewUserForm(UserCreationForm):
             attrs={
                 'placeholder': 'Password',
                 'class': 'form-control',
+                'data-toggle': 'password',
+                'id': 'password'
             }
         )
     )
@@ -59,6 +61,8 @@ class NewUserForm(UserCreationForm):
             attrs={
                 'placeholder': 'Confirm Password',
                 'class': 'form-control',
+                'data-toggle': 'password',
+                'id': 'password',
             }
         )
     )
