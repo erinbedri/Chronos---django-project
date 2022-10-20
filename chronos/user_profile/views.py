@@ -36,7 +36,7 @@ def register_profile(request):
         'form': form,
     }
 
-    return render(request, 'profile/profile_register.html', context)
+    return render(request, 'user_profile/profile_register.html', context)
 
 
 def login_profile(request):
@@ -61,7 +61,7 @@ def login_profile(request):
         'form': form,
     }
 
-    return render(request, 'profile/profile_login.html', context)
+    return render(request, 'user_profile/profile_login.html', context)
 
 
 @login_required
@@ -79,7 +79,7 @@ def show_profile(request):
         'watch_count': watch_count,
     }
 
-    return render(request, 'profile/profile_details.html', context)
+    return render(request, 'user_profile/profile_details.html', context)
 
 
 @login_required
@@ -97,7 +97,7 @@ def edit_profile(request):
         'form': form
     }
 
-    return render(request, 'profile/profile_edit.html', context)
+    return render(request, 'user_profile/profile_edit.html', context)
 
 
 @login_required
@@ -115,4 +115,4 @@ def delete_profile(request):
         'form': form
     }
 
-    return render(request, 'profile/profile_delete.html', context)
+    return render(request, 'user_profile/profile_delete.html', context)

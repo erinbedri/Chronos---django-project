@@ -7,7 +7,7 @@ def show_homepage(request):
     context = {
         'posts': posts,
     }
-    return render(request, 'common/index.html', context)
+    return render(request, 'web/index.html', context)
 
 
 
