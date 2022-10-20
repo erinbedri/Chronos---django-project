@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -61,33 +60,61 @@ class RegisterView(View):
         return render(request, self.template_name, {'form': form})
 
 
-def login_profile(request):
-    if request.method == 'POST':
-        form = PrettyAuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            remember_me = form.cleaned_data.get('remember_me')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if not remember_me:
-                    request.session.set_expiry(0)
-                    request.session.modified = True
-                login(request, user)
-                messages.success(request, LOGIN_SUCCESS_MESSAGE + f'as {username}!')
-                return redirect('show dashboard')
-            else:
-                messages.error(request, LOGIN_ERROR_MESSAGE)
+# def login_profile(request):
+#     if request.method == 'POST':
+#         form = PrettyAuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             remember_me = form.cleaned_data.get('remember_me')
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 if not remember_me:
+#                     request.session.set_expiry(0)
+#                     request.session.modified = True
+#                 login(request, user)
+#                 messages.success(request, LOGIN_SUCCESS_MESSAGE + f'as {username}!')
+#                 return redirect('show dashboard')
+#             else:
+#                 messages.error(request, LOGIN_ERROR_MESSAGE)
+#         else:
+#             messages.error(request, LOGIN_ERROR_MESSAGE)
+#
+#     form = PrettyAuthenticationForm()
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(request, 'user_profile/profile_login.html', context)
+
+
+class LoginView(View):
+    template_name = 'user_profile/profile_login.html'
+    form_class = PrettyAuthenticationForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        remember_me = request.POST.get('remember_me', False)
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if not remember_me:
+                request.session.set_expiry(0)
+                request.session.modified = True
+            login(request, user)
+            messages.success(request, LOGIN_SUCCESS_MESSAGE + f'as {username}!')
+            return redirect('show dashboard')
         else:
             messages.error(request, LOGIN_ERROR_MESSAGE)
 
-    form = PrettyAuthenticationForm()
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'user_profile/profile_login.html', context)
+        return render(request, 'web/index.html')
 
 
 @login_required
