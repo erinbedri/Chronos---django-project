@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views import View
 
 from chronos.user_profile.forms import NewUserForm, PrettyAuthenticationForm, EditProfileForm, DeleteProfileForm
 from chronos.watch.models import Watch
@@ -19,24 +20,44 @@ PROFILE_EDIT_SUCCESS_MESSAGE = 'You successfully updated your profile informatio
 PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile information!'
 
 
-def register_profile(request):
-    if request.method == 'POST':
-        form = NewUserForm(request.POST, request.FILES)
+# def register_profile(request):
+#     if request.method == 'POST':
+#         form = NewUserForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
+#             return redirect('show dashboard')
+#         else:
+#             messages.error(request, REGISTRATION_ERROR_MESSAGE)
+#     else:
+#         form = NewUserForm()
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(request, 'user_profile/profile_register.html', context)
+
+
+class RegisterView(View):
+    form_class = NewUserForm
+    template_name = 'user_profile/profile_register.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
             return redirect('show dashboard')
-        else:
-            messages.error(request, REGISTRATION_ERROR_MESSAGE)
-    else:
-        form = NewUserForm()
 
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'user_profile/profile_register.html', context)
+        return render(request, self.template_name, {'form': form})
 
 
 def login_profile(request):
