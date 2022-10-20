@@ -105,3 +105,5 @@ MEDIA_ROOT = BASE_DIR / "media/"
 LOGIN_URL = 'chronos.user_profile.login_profile'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
