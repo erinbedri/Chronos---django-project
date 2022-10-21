@@ -44,6 +44,12 @@ class RegisterView(View):
     form_class = NewUserForm
     template_name = 'user_profile/profile_register.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('show homepage')
+
+        return super(RegisterView, self).dispatch(request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
