@@ -4,6 +4,7 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
+
         <div class="container py-5 h-40">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-md-9 col-lg-7 col-xl-5">
@@ -22,7 +23,7 @@
                                         <b>Watches in Collection: </b>{{ watch_count }}
                                     </p>
                                     <p class="mb-2 pb-1" style="color: #2b2a2a;">
-                                        <b>Total Paid: </b>EUR {{ total_paid|floatformat:2|intcomma  }}
+                                        <b>Total Paid: </b>EUR {{ total_paid|floatformat:2|intcomma }}
                                     </p>
                                     <p class="mb-2 pb-1" style="color: #2b2a2a;">
                                         <b>Member Since: </b>{{ request.user.date_joined|date }}
@@ -43,7 +44,7 @@
                 </div>
             </div>
         </div>
-        </section>
+
     {% endif %}
 
 {% endblock %}

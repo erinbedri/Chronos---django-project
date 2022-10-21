@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import CASCADE
 
-from chronos.web.validators import file_size
+from chronos.watch.validators import file_size
 
 
 class Watch(models.Model):

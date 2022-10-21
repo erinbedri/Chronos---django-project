@@ -1,4 +1,5 @@
 {% extends 'web/base.html' %}
+{% load static %}
 {% load humanize %}
 
 {% block content %}
@@ -6,8 +7,13 @@
         <div class="row">
             <div class="col-8 text-center">
                 <figure class="figure border">
-                    <img src="{{ watch.image.url }}" class="figure-img img-fluid"
-                         style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                    {% if watch.image %}
+                        <img src="{{ watch.image.url }}" class="figure-img img-fluid"
+                             style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                    {% else %}
+                        <img src="/media/watch/default_watch.png" class="figure-img img-fluid"
+                             style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                    {% endif %}
                 </figure>
             </div>
 

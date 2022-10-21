@@ -1,4 +1,5 @@
 {% extends 'web/base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -51,9 +52,15 @@
                         {% for watch in watches %}
                             <div class="col">
                                 <div class="card">
-                                    <img src="{{ watch.image.url }}" style="object-fit: cover; height: 150px"
-                                         class=""
-                                         alt="{{ watch.brand }} {{ watch.model }}">
+                                    {% if watch.image %}
+                                        <img src="{{ watch.image.url }}" style="object-fit: cover; height: 150px"
+                                             class=""
+                                             alt="{{ watch.brand }} {{ watch.model }}">
+                                    {% else %}
+                                        <img src="/media/watch/default_watch.png" style="object-fit: cover; height: 150px"
+                                             class=""
+                                             alt="{{ watch.brand }} {{ watch.model }}">
+                                    {% endif %}
                                     {% if request.user.is_authenticated and request.user == watch.owner %}
                                         <div class="card-img-overlay">
                                             <span class="badge bg-warning">Your Own</span>
@@ -81,6 +88,7 @@
                                 <li class="page-item">
                                     <a class="page-link" style="color: #ffc30c"
                                        href="?page=
+
                                                {{ watches.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                                         Previous
                                     </a>
@@ -104,6 +112,7 @@
                                     <li class="page-item">
                                         <a class="page-link" style="color: #ffc30c"
                                            href="?page=
+
                                                    {{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ num }}</a>
                                     </li>
                                 {% endif %}
@@ -113,6 +122,7 @@
                                 <li class="page-item">
                                     <a class="page-link" style="color: #ffc30c"
                                        href="?page=
+
                                                {{ watches.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                                         Next
                                     </a>
