@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import CASCADE
@@ -34,6 +35,8 @@ class Watch(models.Model):
     STYLE_MAX_LEN = max([len(style[1]) for style in WATCH_STYLES_CHOICES])
 
     CONDITION_MAX_LEN = 100
+
+    PRICE_MIN_VALUE = 0
 
     DESCRIPTION_MAX_LEN = 500
 
@@ -78,6 +81,9 @@ class Watch(models.Model):
     price_paid = models.FloatField(
         null=True,
         blank=True,
+        validators=[
+            MinValueValidator(PRICE_MIN_VALUE)
+        ]
     )
 
     description = models.TextField(

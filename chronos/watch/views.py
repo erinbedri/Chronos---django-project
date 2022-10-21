@@ -59,7 +59,7 @@ def show_all_watches(request):
 
 def show_my_watches(request):
     watches = Watch.objects.filter(owner_id=request.user.id).order_by('created_at')
-    total_price_paid = sum([watch.price_paid for watch in watches])
+    total_price_paid = sum([watch.price_paid if watch.price_paid is not None else 0 for watch in watches])
 
     context = {
         'watches': watches,
@@ -79,6 +79,8 @@ def add_watch(request):
             watch.save()
             messages.success(request, WATCH_ADD_SUCCESS_MESSAGE)
             return redirect('show dashboard')
+        else:
+            messages.error(request, form.errors)
     else:
         form = CreateWatchForm()
 
