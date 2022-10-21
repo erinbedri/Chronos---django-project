@@ -105,7 +105,7 @@ def logout_profile(request):
 @login_required
 def show_profile(request):
     watch_count = Watch.objects.filter(owner=request.user).count()
-    total_paid = sum([watch.price_paid for watch in Watch.objects.filter(owner=request.user)])
+    total_paid = sum([watch.price_paid if watch.price_paid is not None else 0 for watch in Watch.objects.filter(owner=request.user)])
 
     context = {
         'watch_count': watch_count,
