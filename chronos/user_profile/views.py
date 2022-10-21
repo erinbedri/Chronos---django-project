@@ -127,9 +127,11 @@ def logout_profile(request):
 @login_required
 def show_profile(request):
     watch_count = Watch.objects.filter(owner=request.user).count()
+    total_paid = sum([watch.price_paid for watch in Watch.objects.filter(owner=request.user)])
 
     context = {
         'watch_count': watch_count,
+        'total_paid': total_paid,
     }
 
     return render(request, 'user_profile/profile_details.html', context)
