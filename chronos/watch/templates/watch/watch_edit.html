@@ -9,11 +9,11 @@
                     {% csrf_token %}
                     <div class="row" style="margin-top: 30px">
                         <div class="col">
-                            <label class="mb-1">Brand</label>
+                            <label class="mb-1">Brand*</label>
                             {{ form.brand }}
                         </div>
                         <div class="col">
-                            <label class="mb-1">Model</label>
+                            <label class="mb-1">Model*</label>
                             {{ form.model }}
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="row" style="margin-top: 30px">
                         <div class="col">
-                            <label class="mb-1">Style</label>
+                            <label class="mb-1">Style*</label>
                             {{ form.style }}
                         </div>
                         <div class="col">
@@ -49,9 +49,16 @@
                             {{ form.description }}
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col">
+                            <label class="mb-1">Image</label>
+                            {{ form.image }}
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-warning" style="margin-top: 30px">Edit</button>
                     <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
-                            class="btn btn-secondary flex-grow-1" style="margin-top: 30px">Cancel</button>
+                            class="btn btn-secondary flex-grow-1" style="margin-top: 30px">Cancel
+                    </button>
                 </form>
             </div>
         </div>

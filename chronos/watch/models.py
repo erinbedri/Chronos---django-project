@@ -51,6 +51,8 @@ class Watch(models.Model):
     )
 
     reference_number = models.CharField(
+        blank=True,
+        null=True,
         max_length=REFERENCE_NUMBER_MAX_LEN,
     )
 
@@ -73,7 +75,10 @@ class Watch(models.Model):
         max_length=CONDITION_MAX_LEN,
     )
 
-    price_paid = models.FloatField()
+    price_paid = models.FloatField(
+        null=True,
+        blank=True,
+    )
 
     description = models.TextField(
         null=True,
@@ -82,6 +87,8 @@ class Watch(models.Model):
     )
 
     image = models.ImageField(
+        null=True,
+        blank=True,
         upload_to='watch',
         validators=(
             file_size,
