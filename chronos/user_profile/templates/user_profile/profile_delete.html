@@ -1,8 +1,6 @@
 {% extends 'web/base.html' %}
 
 {% block content %}
-
-    <section>
         <div class="row d-flex justify-content-center" style="margin-top: 50px">
             <div class="col-md-5">
                 <form id="delete" method="POST" action="{% url 'delete profile' %}">
@@ -22,6 +20,4 @@
                 </form>
             </div>
         </div>
-    </section>
-
 {% endblock %}
