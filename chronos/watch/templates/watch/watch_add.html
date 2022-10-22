@@ -7,6 +7,19 @@
                 <h3>Add a new watch to your collection</h3>
                 <form method="POST" action="{% url 'add watch' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div id="form_errors">
+                                {% for key, value in form.errors.items %}
+                                    <strong>{{ value }}</strong>
+                                {% endfor %}
+                            </div>
+                            <strong>{{ message|striptags }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
                     <div class="row" style="margin-top: 30px">
                         <div class="col">
                             <label class="mb-1">Brand*</label>
@@ -23,8 +36,13 @@
                             {{ form.reference_number }}
                         </div>
                         <div class="col">
-                            <label class="mb-1">Year</label>
-                            {{ form.year }}
+                            {% if form.year.errors %}
+                                <label class="mb-1 alert-danger">Year</label>
+                                {{ form.year }}
+                            {% else %}
+                                <label class="mb-1">Year</label>
+                                {{ form.year }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row" style="margin-top: 30px">
@@ -40,7 +58,6 @@
                                 <label class="mb-1">Price Paid in EUR</label>
                                 {{ form.price_paid }}
                             {% endif %}
-
                         </div>
                     </div>
                     <div class="row" style="margin-top: 30px">

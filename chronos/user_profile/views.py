@@ -20,9 +20,43 @@ PROFILE_EDIT_SUCCESS_MESSAGE = 'You successfully updated your profile informatio
 PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile information!'
 
 
-# def register_profile(request):
-#     if request.method == 'POST':
-#         form = NewUserForm(request.POST, request.FILES)
+def register_profile(request):
+    if request.method == 'POST':
+        form = NewUserForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
+            return redirect('show dashboard')
+        else:
+            messages.error(request, form.errors)
+    else:
+        form = NewUserForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'user_profile/profile_register.html', context)
+
+
+# class RegisterView(View):
+#     form_class = NewUserForm
+#     template_name = 'user_profile/profile_register.html'
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             return redirect('show homepage')
+#
+#         return super(RegisterView, self).dispatch(request, *args, **kwargs)
+#
+#     def get(self, request, *args, **kwargs):
+#         form = self.form_class()
+#         return render(request, self.template_name, {'form': form})
+#
+#     def post(self, request, *args, **kwargs):
+#         form = self.form_class(request.POST)
+#
 #         if form.is_valid():
 #             user = form.save()
 #             login(request, user)
@@ -30,40 +64,8 @@ PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile informat
 #             return redirect('show dashboard')
 #         else:
 #             messages.error(request, REGISTRATION_ERROR_MESSAGE)
-#     else:
-#         form = NewUserForm()
 #
-#     context = {
-#         'form': form,
-#     }
-#
-#     return render(request, 'user_profile/profile_register.html', context)
-
-
-class RegisterView(View):
-    form_class = NewUserForm
-    template_name = 'user_profile/profile_register.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('show homepage')
-
-        return super(RegisterView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
-            return redirect('show dashboard')
-
-        return render(request, self.template_name, {'form': form})
+#         return render(request, self.template_name, {'form': form})
 
 
 def login_profile(request):
@@ -105,7 +107,8 @@ def logout_profile(request):
 @login_required
 def show_profile(request):
     watch_count = Watch.objects.filter(owner=request.user).count()
-    total_paid = sum([watch.price_paid if watch.price_paid is not None else 0 for watch in Watch.objects.filter(owner=request.user)])
+    total_paid = sum(
+        [watch.price_paid if watch.price_paid is not None else 0 for watch in Watch.objects.filter(owner=request.user)])
 
     context = {
         'watch_count': watch_count,

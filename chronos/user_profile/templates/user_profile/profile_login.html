@@ -8,6 +8,19 @@
                 <h3>Login</h3>
                 <form method="POST" action="{% url 'login profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+
+                    {% if messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div id="form_errors">
+                                {% for message in messages %}
+                                    <strong>{{ message }}</strong>
+                                {% endfor %}
+                            </div>
+                            <strong>{{ message|striptags }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
                     <div class="col" style="margin-top: 30px">
                         <label class="mb-1">Username</label>
                         {{ form.username }}

@@ -87,6 +87,7 @@ def add_watch(request):
     context = {
         'form': form,
     }
+
     return render(request, 'watch/watch_add.html', context)
 
 
