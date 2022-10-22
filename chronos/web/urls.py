@@ -4,7 +4,7 @@ from chronos.web import views
 
 urlpatterns = [
     path('', views.show_homepage, name='show homepage'),
-    path('profile/', include('chronos.accounts.urls')),
-    path('post/', include('chronos.post.urls')),
+    path('accounts/', include('chronos.accounts.urls')),
+    path('posts/', include('chronos.posts.urls')),
     path('watch/', include('chronos.watch.urls')),
 ]

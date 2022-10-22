@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='postcomment',
-            name='post',
+            name='posts',
         ),
         migrations.DeleteModel(
             name='Post',

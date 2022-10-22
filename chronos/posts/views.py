@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 
-from chronos.post.forms import PostCommentForm
-from chronos.post.models import Post, PostComment
+from chronos.posts.forms import PostCommentForm
+from chronos.posts.models import Post, PostComment
 
 
 def show_post(request, pk):
@@ -17,7 +17,7 @@ def show_post(request, pk):
             new_comment.post = post
             new_comment.author = request.user
             new_comment.save()
-            return redirect('show post', pk)
+            return redirect('show posts', pk)
     else:
         form = PostCommentForm()
 
@@ -27,4 +27,4 @@ def show_post(request, pk):
         'comments': comments,
         'comment_count': comment_count,
     }
-    return render(request, 'post/post_details.html', context)
+    return render(request, 'posts/details.html', context)

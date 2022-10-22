@@ -1,6 +1,6 @@
 from django import forms
 
-from chronos.post.models import PostComment
+from chronos.posts.models import PostComment
 
 
 class PostCommentForm(forms.ModelForm):

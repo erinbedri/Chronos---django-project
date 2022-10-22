@@ -11,15 +11,19 @@ class Post(models.Model):
         max_length=TITLE_MAX_LEN,
         unique=True,
     )
+
     author = models.ForeignKey(
         User,
         on_delete=CASCADE,
         related_name='blog_posts',
     )
+
     content = RichTextField()
+
     created_on = models.DateTimeField(
         auto_now_add=True,
     )
+
     updated_on = models.DateTimeField(
         auto_now=True
     )
@@ -38,14 +42,17 @@ class PostComment(models.Model):
         User,
         on_delete=CASCADE,
     )
+
     post = models.ForeignKey(
         Post,
         on_delete=CASCADE,
         related_name='comments'
     )
+
     body = models.TextField(
         max_length=COMMENT_MAX_LEN,
     )
+
     created_on = models.DateTimeField(
         auto_now_add=True
     )

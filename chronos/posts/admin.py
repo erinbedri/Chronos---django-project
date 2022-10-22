@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from chronos.post.models import Post, PostComment
+from chronos.posts.models import Post, PostComment
 
 
 @admin.register(Post)

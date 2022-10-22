@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'chronos.web',
-    'chronos.post',
+    'chronos.posts',
     'chronos.accounts',
     'chronos.watch',
 
