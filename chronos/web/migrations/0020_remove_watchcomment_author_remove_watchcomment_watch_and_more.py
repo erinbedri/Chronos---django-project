@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='watchcomment',
-            name='watch',
+            name='watches',
         ),
         migrations.DeleteModel(
             name='Watch',

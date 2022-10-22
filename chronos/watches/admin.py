@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from chronos.watch.models import Watch, WatchComment
+from chronos.watches.models import Watch, WatchComment
 
 
 @admin.register(Watch)

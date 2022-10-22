@@ -1,6 +1,6 @@
 from django import forms
 
-from chronos.watch.models import Watch, WatchComment
+from chronos.watches.models import Watch, WatchComment
 
 
 class CreateWatchForm(forms.ModelForm):

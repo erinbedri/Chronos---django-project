@@ -24,19 +24,19 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
-            model_name='watch',
+            model_name='watches',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='watch',
+            model_name='watches',
             name='owner',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='web.profile'),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='watch',
+            model_name='watches',
             name='updated_at',
             field=models.DateTimeField(auto_now=True),
         ),

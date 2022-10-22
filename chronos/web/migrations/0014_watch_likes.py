@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='watch',
+            model_name='watches',
             name='likes',
             field=models.ManyToManyField(related_name='watch_likes', to=settings.AUTH_USER_MODEL),
         ),

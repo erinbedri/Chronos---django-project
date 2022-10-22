@@ -8,14 +8,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from chronos.watch.forms import CreateWatchForm, WatchCommentForm, EditWatchForm, DeleteWatchForm
-from chronos.watch.models import Watch, WatchComment
+from chronos.watches.forms import CreateWatchForm, WatchCommentForm, EditWatchForm, DeleteWatchForm
+from chronos.watches.models import Watch, WatchComment
 
-WATCH_ADD_SUCCESS_MESSAGE = 'The watch was successfully added!'
+WATCH_ADD_SUCCESS_MESSAGE = 'The watches was successfully added!'
 
-WATCH_EDIT_SUCCESS_MESSAGE = 'The watch was successfully updated!'
+WATCH_EDIT_SUCCESS_MESSAGE = 'The watches was successfully updated!'
 
-WATCH_DELETE_SUCCESS_MESSAGE = 'The watch was successfully deleted!'
+WATCH_DELETE_SUCCESS_MESSAGE = 'The watches was successfully deleted!'
 
 WATCHES_PER_PAGE = 8
 
@@ -54,7 +54,7 @@ def show_all_watches(request):
         'styles': styles,
     }
 
-    return render(request, 'watch/watch_show_all.html', context)
+    return render(request, 'watches/show_all.html', context)
 
 
 def show_my_watches(request):
@@ -66,7 +66,7 @@ def show_my_watches(request):
         'total_price_paid': total_price_paid,
     }
 
-    return render(request, 'watch/watch_show_collection.html', context)
+    return render(request, 'watches/show_collection.html', context)
 
 
 @login_required
@@ -88,7 +88,7 @@ def add_watch(request):
         'form': form,
     }
 
-    return render(request, 'watch/watch_add.html', context)
+    return render(request, 'watches/add.html', context)
 
 
 def show_watch(request, pk):
@@ -120,7 +120,7 @@ def show_watch(request, pk):
         'like_count': like_count,
         'liked': liked,
     }
-    return render(request, 'watch/watch_details.html', context)
+    return render(request, 'watches/details.html', context)
 
 
 @login_required
@@ -144,7 +144,7 @@ def edit_watch(request, pk):
         'form': form
     }
 
-    return render(request, 'watch/watch_edit.html', context)
+    return render(request, 'watches/edit.html', context)
 
 
 @login_required
@@ -171,7 +171,7 @@ def delete_watch(request, pk):
         'form': form
     }
 
-    return render(request, 'watch/watch_delete.html', context)
+    return render(request, 'watches/delete.html', context)
 
 
 @login_required

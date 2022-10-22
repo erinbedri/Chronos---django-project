@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='watch',
+            name='watches',
             options={'verbose_name_plural': 'watches'},
         ),
         migrations.CreateModel(

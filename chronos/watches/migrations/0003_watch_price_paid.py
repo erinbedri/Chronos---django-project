@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('watch', '0002_alter_watchcomment_options'),
+        ('watches', '0002_alter_watchcomment_options'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='watch',
+            model_name='watches',
             name='price_paid',
             field=models.FloatField(default=0),
             preserve_default=False,

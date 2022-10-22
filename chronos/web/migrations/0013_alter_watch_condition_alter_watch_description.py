@@ -11,12 +11,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='watch',
+            model_name='watches',
             name='condition',
             field=models.TextField(blank=True, max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='watch',
+            model_name='watches',
             name='description',
             field=models.TextField(blank=True, max_length=500, null=True),
         ),

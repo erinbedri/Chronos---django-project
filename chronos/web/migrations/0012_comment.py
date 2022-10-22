@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('body', models.TextField(max_length=300)),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('watch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='web.watch')),
+                ('watches', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='web.watches')),
             ],
             options={
                 'ordering': ['-created_on'],

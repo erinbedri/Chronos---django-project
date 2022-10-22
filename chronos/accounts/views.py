@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from chronos.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditProfileForm, DeleteProfileForm
-from chronos.watch.models import Watch
+from chronos.watches.models import Watch
 
 REGISTRATION_SUCCESS_MESSAGE = 'Registration successful!'
 

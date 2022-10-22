@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='watch',
+            model_name='watches',
             name='style',
             field=models.CharField(choices=[('Pocket', 'Pocket Watch'), ('Railroad', 'Railroad Watch'), ('Dress', 'Dress Watch'), ('Field', 'Field Watch'), ('Aviator', 'Aviator Watch'), ('Dive', 'Dive Watch'), ('Racing', 'Racing Watch'), ('Digital', 'Digital Watch'), ('Smart ', 'Smart Watch '), ('Fashion', 'Fashion Watch')], max_length=14),
         ),
