@@ -18,7 +18,7 @@ PROFILE_EDIT_SUCCESS_MESSAGE = 'You successfully updated your profile informatio
 PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile information!'
 
 
-def register_profile(request):
+def register_account(request):
     if request.user.is_authenticated:
         return redirect('show homepage')
 
@@ -41,35 +41,7 @@ def register_profile(request):
     return render(request, 'accounts/register.html', context)
 
 
-# class RegisterView(View):
-#     form_class = NewUserForm
-#     template_name = 'accounts/register.html'
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             return redirect('show homepage')
-#
-#         return super(RegisterView, self).dispatch(request, *args, **kwargs)
-#
-#     def get(self, request, *args, **kwargs):
-#         form = self.form_class()
-#         return render(request, self.template_name, {'form': form})
-#
-#     def post(self, request, *args, **kwargs):
-#         form = self.form_class(request.POST)
-#
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
-#             return redirect('show dashboard')
-#         else:
-#             messages.error(request, REGISTRATION_ERROR_MESSAGE)
-#
-#         return render(request, self.template_name, {'form': form})
-
-
-def login_profile(request):
+def login_user(request):
     if request.user.is_authenticated:
         return redirect('show homepage')
 
@@ -102,14 +74,14 @@ def login_profile(request):
 
 
 @login_required
-def logout_profile(request):
+def logout_user(request):
     logout(request)
     messages.success(request, LOGOUT_SUCCESS_MESSAGE)
     return redirect('show homepage')
 
 
 @login_required
-def show_profile(request):
+def show_account(request):
     watch_count = Watch.objects.filter(owner=request.user).count()
     total_paid = sum(
         [watch.price_paid if watch.price_paid is not None else 0
@@ -124,7 +96,7 @@ def show_profile(request):
 
 
 @login_required
-def edit_profile(request):
+def edit_account(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -144,7 +116,7 @@ def edit_profile(request):
 
 
 @login_required
-def delete_profile(request):
+def delete_account(request):
     if request.method == 'POST':
         form = DeleteProfileForm(request.POST, instance=request.user)
         if form.is_valid():

@@ -31,19 +31,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'show profile' %}">Profile</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'show account' %}">Profile</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'logout profile' %}">Logout</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'logout user' %}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'login profile' %}">Login</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'login user' %}">Login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'register profile' %}">Register</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'register account' %}">Register</a>
                     </li>
                 {% endif %}
             </ul>

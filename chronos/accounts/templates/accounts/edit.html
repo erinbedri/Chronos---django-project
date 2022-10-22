@@ -5,7 +5,7 @@
         <div class="row justify-content-md-center">
             <div class="col-md-6">
                 <h3>Edit details of your profile</h3>
-                <form method="POST" action="{% url 'edit profile' %}">
+                <form method="POST" action="{% url 'edit account' %}">
                     {% csrf_token %}
 
                     {% if form.errors %}
@@ -41,28 +41,12 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-warning" style="margin-top: 30px">Edit</button>
-                    <button type="button" onclick="location.href='{% url 'show profile' %}'"
+                    <button type="button" onclick="location.href='{% url 'show account' %}'"
                             class="btn btn-secondary flex-grow-1" style="margin-top: 30px">Cancel
                     </button>
                 </form>
             </div>
         </div>
     </div>
-
-    {% comment %}
-    <div class="row d-flex justify-content-center" style="margin-top: 20px">
-        <div class="col-md-5">
-            <h3 style="margin-bottom: 20px">Edit details of your profile</h3>
-            <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-secondary">Edit</button>
-                <button type="button" onclick="location.href='{% url 'show profile' %}'"
-                        class="btn btn-danger flex-grow-1">Cancel
-                </button>
-            </form>
-        </div>
-    </div>
-    {% endcomment %}
 
 {% endblock %}
