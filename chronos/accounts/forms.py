@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
-class NewUserForm(UserCreationForm):
+class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(required=True,
                                  max_length=30,
                                  widget=forms.TextInput(attrs={'placeholder': 'First Name',
@@ -41,17 +41,8 @@ class NewUserForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['first_name'].label = 'First Name'
-        self.fields['last_name'].label = "Last Name"
-        self.fields['email'].label = 'Email Address'
-        self.fields['username'].label = "Username"
-        self.fields['password1'].label = 'Password'
-        self.fields['password2'].label = "Confirm Password"
-
     def save(self, commit=True):
-        user = super(NewUserForm, self).save(commit=False)
+        user = super(RegisterUserForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
@@ -70,7 +61,7 @@ class NewUserForm(UserCreationForm):
         return self.cleaned_data
 
 
-class PrettyAuthenticationForm(AuthenticationForm):
+class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username',
                                                              'class': 'form-control',
                                                              }))

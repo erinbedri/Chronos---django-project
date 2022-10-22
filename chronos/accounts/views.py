@@ -2,13 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views import View
 
-from chronos.user_profile.forms import NewUserForm, PrettyAuthenticationForm, EditProfileForm, DeleteProfileForm
+from chronos.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditProfileForm, DeleteProfileForm
 from chronos.watch.models import Watch
 
 REGISTRATION_SUCCESS_MESSAGE = 'Registration successful!'
-REGISTRATION_ERROR_MESSAGE = 'Unsuccessful registration. Invalid information.'
 
 LOGIN_SUCCESS_MESSAGE = 'You are successfully logged in '
 LOGIN_ERROR_MESSAGE = 'Invalid username or password!'
@@ -21,8 +19,11 @@ PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile informat
 
 
 def register_profile(request):
+    if request.user.is_authenticated:
+        return redirect('show homepage')
+
     if request.method == 'POST':
-        form = NewUserForm(request.POST, request.FILES)
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -31,18 +32,18 @@ def register_profile(request):
         else:
             messages.error(request, form.errors)
     else:
-        form = NewUserForm()
+        form = RegisterUserForm()
 
     context = {
         'form': form,
     }
 
-    return render(request, 'user_profile/profile_register.html', context)
+    return render(request, 'accounts/register.html', context)
 
 
 # class RegisterView(View):
 #     form_class = NewUserForm
-#     template_name = 'user_profile/profile_register.html'
+#     template_name = 'accounts/register.html'
 #
 #     def dispatch(self, request, *args, **kwargs):
 #         if request.user.is_authenticated:
@@ -69,8 +70,11 @@ def register_profile(request):
 
 
 def login_profile(request):
+    if request.user.is_authenticated:
+        return redirect('show homepage')
+
     if request.method == 'POST':
-        form = PrettyAuthenticationForm(request, data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -87,14 +91,14 @@ def login_profile(request):
                 messages.error(request, LOGIN_ERROR_MESSAGE)
         else:
             messages.error(request, LOGIN_ERROR_MESSAGE)
-
-    form = PrettyAuthenticationForm()
+    else:
+        form = CustomAuthenticationForm()
 
     context = {
         'form': form,
     }
 
-    return render(request, 'user_profile/profile_login.html', context)
+    return render(request, 'accounts/login.html', context)
 
 
 @login_required
@@ -108,20 +112,21 @@ def logout_profile(request):
 def show_profile(request):
     watch_count = Watch.objects.filter(owner=request.user).count()
     total_paid = sum(
-        [watch.price_paid if watch.price_paid is not None else 0 for watch in Watch.objects.filter(owner=request.user)])
+        [watch.price_paid if watch.price_paid is not None else 0
+         for watch in Watch.objects.filter(owner=request.user)])
 
     context = {
         'watch_count': watch_count,
         'total_paid': total_paid,
     }
 
-    return render(request, 'user_profile/profile_details.html', context)
+    return render(request, 'accounts/details.html', context)
 
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, request.FILES, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, PROFILE_EDIT_SUCCESS_MESSAGE)
@@ -135,13 +140,13 @@ def edit_profile(request):
         'form': form
     }
 
-    return render(request, 'user_profile/profile_edit.html', context)
+    return render(request, 'accounts/edit.html', context)
 
 
 @login_required
 def delete_profile(request):
     if request.method == 'POST':
-        form = DeleteProfileForm(request.POST, request.FILES, instance=request.user)
+        form = DeleteProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             request.user.delete()
             messages.success(request, PROFILE_DELETE_SUCCESS_MESSAGE)
@@ -153,4 +158,4 @@ def delete_profile(request):
         'form': form
     }
 
-    return render(request, 'user_profile/profile_delete.html', context)
+    return render(request, 'accounts/delete.html', context)

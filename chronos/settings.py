@@ -19,7 +19,7 @@ INSTALLED_APPS = [
 
     'chronos.web',
     'chronos.post',
-    'chronos.user_profile',
+    'chronos.accounts',
     'chronos.watch',
 
     "crispy_forms",
@@ -102,7 +102,7 @@ MEDIA_URL = "media/"
 
 MEDIA_ROOT = BASE_DIR / "media/"
 
-LOGIN_URL = 'chronos.user_profile.login_profile'
+LOGIN_URL = 'chronos.accounts.login_profile'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
