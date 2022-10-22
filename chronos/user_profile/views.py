@@ -126,6 +126,8 @@ def edit_profile(request):
             form.save()
             messages.success(request, PROFILE_EDIT_SUCCESS_MESSAGE)
             return redirect('show profile')
+        else:
+            messages.error(request, form.errors)
     else:
         form = EditProfileForm(instance=request.user)
 

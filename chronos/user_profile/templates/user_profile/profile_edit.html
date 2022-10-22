@@ -7,6 +7,19 @@
                 <h3>Edit details of your profile</h3>
                 <form method="POST" action="{% url 'edit profile' %}">
                     {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div id="form_errors">
+                                {% for key, value in form.errors.items %}
+                                    <strong>{{ value }}</strong>
+                                {% endfor %}
+                            </div>
+                            <strong>{{ message|striptags }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
                     <div class="row" style="margin-top: 30px">
                         <div class="col">
                             <label class="mb-1">First Name*</label>

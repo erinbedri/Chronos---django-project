@@ -12,7 +12,7 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                           style="color: #FFC107">Welcome, {{ user.username }}</a>
+                           style="color: #FFC107">Welcome, {{ request.user.username }}</a>
                     </li>
                 {% endif %}
 

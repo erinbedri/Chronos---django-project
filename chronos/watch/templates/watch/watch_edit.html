@@ -7,6 +7,7 @@
                 <h3>Edit watch details from your collection</h3>
                 <form method="POST" action="{% url 'edit watch' watch.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
+
                     <div class="row" style="margin-top: 30px">
                         <div class="col">
                             <label class="mb-1">Brand*</label>
