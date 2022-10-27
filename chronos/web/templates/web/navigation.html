@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'show homepage' %}">CHRONOS</a>
+        <a class="navbar-brand" href="{% url 'web:show_homepage' %}">CHRONOS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -17,89 +17,42 @@
                 {% endif %}
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'show dashboard' %}">All Watches</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'posts:show_posts' %}">Posts</a>
                 </li>
-
-                {% if user.is_authenticated %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'add watch' %}">Add Watch</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'show collection' %}">My Collection</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'show account' %}">Profile</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'logout user' %}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'login user' %}">Login</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'register account' %}">Register</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-
-{% comment %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'show homepage' %}">CHRONOS</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" style="color: #FFC107">Welcome, {{ user.username }}</a>
-                    </li>
-                {% endif %}
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'show dashboard' %}">All Watches</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'watches:show_all_watches' %}">All Watches</a>
                 </li>
 
                 {% if user.is_authenticated %}
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'add watches' %}">Add Watch</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'watches:add_watch' %}">Add Watch</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'show profile' %}">Profile</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'watches:show_collection' %}">My
+                            Collection</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'logout profile' %}">Logout</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:show' %}">Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:logout' %}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'login profile' %}">Login</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:login' %}">Login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'register profile' %}">Register</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:register' %}">Register</a>
                     </li>
                 {% endif %}
-
             </ul>
         </div>
     </div>
 </nav>
 
-{% endcomment %}

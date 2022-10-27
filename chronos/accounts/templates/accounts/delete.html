@@ -3,7 +3,7 @@
 {% block content %}
         <div class="row d-flex justify-content-center" style="margin-top: 50px">
             <div class="col-md-5">
-                <form id="delete" method="POST" action="{% url 'delete account' %}">
+                <form id="delete" method="POST" action="{% url 'accounts:delete' %}">
                     <div class="container">
 
                         <h3>Are you sure you want to delete your profile?</h3>
@@ -13,7 +13,7 @@
 
                         <input class="btn btn-danger flex-grow-1" type="submit" value="Delete Profile"
                                style="margin-top: 20px">
-                        <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
+                        <button type="button" onclick="location.href='{% url 'web:show_homepage' %}'"
                                 class="btn btn-secondary flex-grow-1" style="margin-top: 20px">Cancel
                         </button>
                     </div>

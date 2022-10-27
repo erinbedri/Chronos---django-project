@@ -30,7 +30,7 @@
 
                 <div>
                     {% if request.user.is_authenticated %}
-                        <form method="POST" action="{% url 'like watch' watch.id %}">
+                        <form method="POST" action="{% url 'watches:like_watch' watch.id %}">
                             {% csrf_token %}
                             {% if not liked %}
                                 <button type="submit" name="watch_id" value="watch.id" class="btn btn-warning">Like
@@ -44,10 +44,10 @@
 
                     <div style="margin-top: 15px">
                         {% if request.user.is_authenticated and request.user == watch.owner %}
-                            <a href="{% url 'edit watch' watch.id %}"
+                            <a href="{% url 'watches:edit_watch' watch.id %}"
                                class="btn btn-warning"
                                style="position: relative;">Edit</a>
-                            <a href="{% url 'delete watch' watch.id %}"
+                            <a href="{% url 'watches:delete_watch' watch.id %}"
                                class="btn btn-outline-danger"
                                style="position: relative;">Delete</a>
                         {% endif %}

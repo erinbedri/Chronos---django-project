@@ -20,7 +20,7 @@ PROFILE_DELETE_SUCCESS_MESSAGE = 'You successfully deleted your profile informat
 
 def register_account(request):
     if request.user.is_authenticated:
-        return redirect('show homepage')
+        return redirect('web:show_homepage')
 
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
@@ -28,7 +28,7 @@ def register_account(request):
             user = form.save()
             login(request, user)
             messages.success(request, REGISTRATION_SUCCESS_MESSAGE)
-            return redirect('show dashboard')
+            return redirect('watches:show_all_watches')
         else:
             messages.error(request, form.errors)
     else:
@@ -43,7 +43,7 @@ def register_account(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect('show homepage')
+        return redirect('web:homepage')
 
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
@@ -58,7 +58,7 @@ def login_user(request):
                     request.session.modified = True
                 login(request, user)
                 messages.success(request, LOGIN_SUCCESS_MESSAGE + f'as {username}!')
-                return redirect('show dashboard')
+                return redirect('watches:show_all_watches')
             else:
                 messages.error(request, LOGIN_ERROR_MESSAGE)
         else:
@@ -77,7 +77,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, LOGOUT_SUCCESS_MESSAGE)
-    return redirect('show homepage')
+    return redirect('web:show_homepage')
 
 
 @login_required
@@ -102,7 +102,7 @@ def edit_account(request):
         if form.is_valid():
             form.save()
             messages.success(request, PROFILE_EDIT_SUCCESS_MESSAGE)
-            return redirect('show profile')
+            return redirect('accounts:show')
         else:
             messages.error(request, form.errors)
     else:
@@ -122,7 +122,7 @@ def delete_account(request):
         if form.is_valid():
             request.user.delete()
             messages.success(request, PROFILE_DELETE_SUCCESS_MESSAGE)
-            return redirect('show homepage')
+            return redirect('web:show_homepage')
     else:
         form = DeleteProfileForm(instance=request.user)
 

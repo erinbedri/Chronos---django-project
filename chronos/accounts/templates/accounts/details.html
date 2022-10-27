@@ -29,11 +29,11 @@
                                         <b>Member Since: </b>{{ request.user.date_joined|date }}
                                     </p>
                                     <div class="d-flex pt-1">
-                                        <button type="button" onclick="location.href='{% url 'edit account' %}'"
+                                        <button type="button" onclick="location.href='{% url 'accounts:edit' %}'"
                                                 class="btn btn-warning me-1 flex-grow-1">Edit
                                         </button>
                                         <button type="button"
-                                                onclick="location.href='{% url 'delete account' %}'"
+                                                onclick="location.href='{% url 'accounts:delete' %}'"
                                                 class="btn btn-outline-danger flex-grow-1">Delete
                                         </button>
                                     </div>

@@ -5,6 +5,16 @@ from chronos.posts.forms import PostCommentForm
 from chronos.posts.models import Post, PostComment
 
 
+def show_posts(request):
+    posts = Post.objects.all()
+
+    context = {
+        'posts': posts,
+    }
+
+    return render(request, 'posts/posts_all.html', context)
+
+
 def show_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = PostComment.objects.filter(post_id=pk).order_by('created_on')
@@ -17,7 +27,7 @@ def show_post(request, pk):
             new_comment.post = post
             new_comment.author = request.user
             new_comment.save()
-            return redirect('show posts', pk)
+            return redirect('posts:show_posts', pk)
     else:
         form = PostCommentForm()
 
@@ -27,4 +37,4 @@ def show_post(request, pk):
         'comments': comments,
         'comment_count': comment_count,
     }
-    return render(request, 'posts/details.html', context)
+    return render(request, 'posts/post_details.html', context)

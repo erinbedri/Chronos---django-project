@@ -78,7 +78,7 @@ def add_watch(request):
             watch.owner = request.user
             watch.save()
             messages.success(request, WATCH_ADD_SUCCESS_MESSAGE)
-            return redirect('show dashboard')
+            return redirect('watches:show_all_watches')
         else:
             messages.error(request, form.errors)
     else:
@@ -108,7 +108,7 @@ def show_watch(request, pk):
             new_comment.watch = watch
             new_comment.author = request.user
             new_comment.save()
-            return redirect('show watch', pk)
+            return redirect('watches:show_watch', pk)
     else:
         form = WatchCommentForm()
 
@@ -135,7 +135,7 @@ def edit_watch(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, WATCH_EDIT_SUCCESS_MESSAGE)
-            return redirect('show dashboard')
+            return redirect('watches:show_watch', pk)
     else:
         form = EditWatchForm(instance=watch)
 
@@ -162,7 +162,7 @@ def delete_watch(request, pk):
                 os.remove(image_path)
             watch.delete()
             messages.success(request, WATCH_DELETE_SUCCESS_MESSAGE)
-            return redirect('show dashboard')
+            return redirect('watches:show_all_watches')
     else:
         form = DeleteWatchForm(instance=watch)
 
@@ -186,4 +186,4 @@ def like_watch(request, pk):
         watch.likes.add(request.user)
         liked = True
 
-    return HttpResponseRedirect(reverse('show watch', args=[str(pk)]))
+    return HttpResponseRedirect(reverse('watches:show_watch', args=[str(pk)]))
